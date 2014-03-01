@@ -1,10 +1,8 @@
 from django.shortcuts import render
 from django.views.generic import CreateView, ListView, DetailView, DeleteView, UpdateView
 from rest_framework import viewsets
-from .serializers import ProgramSerializer, CourseSerializer,
-CourseGroupSerializer, TrajectorySerializer
-from .models import Trajectory, Program, Major, Minor, GenEd, Concentration,
-MetaCourse, Course, CourseGroup
+from mainapp.serializers import ProgramSerializer, CourseSerializer, CourseGroupSerializer, TrajectorySerializer
+from mainapp.models import Trajectory, Program, Major, Minor, GenEd, Concentration, MetaCourse, Course, CourseGroup
 # Create your views here.
 #API SHIT
 
