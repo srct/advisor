@@ -1,16 +1,32 @@
+from model_utils.models import TimeStampedModel
+from autoslug import AutoSlugField
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 
 
-class Program(models.Model):
+class AdvisorUser(TimeStampedModel):
+    user = models.OneToOneField(User)
+    tj = models.ForeignKey(Trajectory)
+
+    def __unicode__(self):
+        return '%s' % self.user
+
+class Trajectory(TimeStampedModel):
+    pass
+
+class Program(TimeStampedModel):
     name = models.CharField(max_length=50)
-    slug = models.SlugField(max_length=50)
+    slug = AutoSlugField(populate_from='name')
     description = models.TextField(blank=True)
     courses = models.ManyToManyField(MetaCourse)
 
     class Meta:
         abstract = True
+
+    def __unicode__(self):
+        return '%s' % self.name
 
 
 class Major(Program):
@@ -30,14 +46,17 @@ class Concentration(Program):
     pass
 
 
-class MetaCourse(models.Model):
+class MetaCourse(TimeStampedModel):
     name = models.CharField(max_length=50)
-    slug = models.SlugField(max_length=50)
+    slug = AutoSlugField(populate_from='name')
     catalogyear = models.IntegerField()
     description = models.TextField(blank=True)
 
     class Meta:
         abstract = True
+
+    def __unicode__(self):
+        return '%s' % self.name
 
 
 class Course(MetaCourse):
