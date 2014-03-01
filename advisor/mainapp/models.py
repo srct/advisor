@@ -22,7 +22,7 @@ class AdvisorAdminUser(TimeStampedModel):
 
 
 class Semester(models.Model):
-    name = models.CharField(max_length=50)
+    number = models.IntegerField()
     user = models.ForeignKey(Student)
     courses = models.ManyToManyField('Course')
 
