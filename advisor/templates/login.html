@@ -1,0 +1,55 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}
+Login | YourSchool Advisor
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header" id="banner">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h1><strong>YourSchool Advisor</strong></h1>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-lg-6 col-lg-offset-3">
+    <div class="well">
+      {% if form.error %}
+      <div class="row">
+        <div class="col-md-12">
+	  <div class="alert alert-danger alert-dismissable">
+	    <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Dang!</strong> Your username or password weren't right. Please try again.
+	  </div>
+	</div>
+      </div>
+      {% endif %}
+
+      <form>
+        <fieldset>
+
+          <legend>Log In</legend>
+
+          <div>
+	    Username
+	  </div>
+
+          <div>
+	    Password
+	  </div>
+
+          <div>
+            Sign In
+	  </div>
+
+	</fieldset>
+      </form>
+
+    </div>
+  </div>
+</div>
+
+{% endblock %}
