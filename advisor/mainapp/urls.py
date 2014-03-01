@@ -1,6 +1,6 @@
 from django.conf.urls import patterns, include, url
-import apiviews
-from .views import *
+import .apiviews
+#from .views import *
 from .models import Program, Course, CourseGroup, Trajectory
 
 from rest_framework.routers import DefaultRouter
