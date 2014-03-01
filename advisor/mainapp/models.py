@@ -77,10 +77,13 @@ class MetaCourse(TimeStampedModel):
 
 
 class Course(MetaCourse):
+    dept = models.CharField(max_length=50)
+    courseid = models.IntegerField()
     prerequisites = models.ManyToManyField(MetaCourse,
         blank=True, related_name='prereq+')
     corequisites = models.ManyToManyField(MetaCourse,
         blank=True, related_name='coreq+')
+    credits = models.IntegerField()
 
 
 class CourseGroup(MetaCourse):
