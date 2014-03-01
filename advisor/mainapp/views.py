@@ -1,7 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import CreateView, ListView, DetailView, DeleteView, UpdateView
 from rest_framework import viewsets
-MetaCourse, Course, CourseGroup
 from .serializers import ProgramSerializer, CourseSerializer,
 CourseGroupSerializer, TrajectorySerializer
 from .models import Trajectory, Program, Major, Minor, GenEd, Concentration,
