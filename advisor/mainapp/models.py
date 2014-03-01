@@ -22,7 +22,7 @@ class AdvisorAdminUser(TimeStampedModel):
 
 
 class Semester(models.Model):
-    name = models.CharField(max_length=50)
+    number = models.IntegerField()
     user = models.ForeignKey(Student)
     courses = models.ManyToManyField('Course')
 
@@ -38,9 +38,6 @@ class Program(TimeStampedModel):
     slug = AutoSlugField(populate_from='name')
     description = models.TextField(blank=True)
     courses = models.ManyToManyField('MetaCourse')
-
-    class Meta:
-        abstract = True
 
     def __unicode__(self):
         return '%s' % self.name

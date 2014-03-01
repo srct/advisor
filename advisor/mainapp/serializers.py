@@ -1,6 +1,6 @@
 from rest_framework import serializers
-from .models import Trajectory, Program, Major, Minor, GenEd, Concentration,
-MetaCourse, Course, CourseGroup
+from .models import Trajectory, Program, Major, Minor, GenEd, Concentration, \
+    MetaCourse, Course, CourseGroup
 
 class TrajectorySerializer(serializers.ModelSerializer):
     class Meta:
@@ -22,18 +22,18 @@ class GenEdSerializer(serializers.ModelSerializer):
     class Meta:
         model = GenEd
 
-class ConcentrationSerializer(serializer.ModelSerializer):
+class ConcentrationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Concentration
 
-class MetaCourseSerializer(serializer.ModelSerializer):
+class MetaCourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = MetaCourse
 
-class CourseSerializer(serializer.ModelSerializer):
+class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
 
-class CourseGroupSerializer(serializer.ModelSerializer):
+class CourseGroupSerializer(serializers.ModelSerializer):
     class Meta:
         model = CourseGroup
