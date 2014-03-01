@@ -10,5 +10,6 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^advisor/', include('mainapp.urls')),
+    url(r'^api/', include('rest_framework.urls', namespace='rest_framework'))
 )
 
