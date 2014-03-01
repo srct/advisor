@@ -6,31 +6,41 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 
-class AdvisorUser(TimeStampedModel):
+class Student(TimeStampedModel):
     user = models.OneToOneField(User)
-    major = models.ForeignKey(Major)
-    tj = models.ForeignKey(Trajectory)
+    major = models.ForeignKey('Major')
+    tj = models.OneToOneField('Trajectory')
     dateOfGrad = models.DateField()
-    advisorMan = models.ForeignKey(AdvisorAdminUser):
+    advisorname = models.OneToOneField('AdvisorAdminUser')
 
     def __unicode__(self):
         return '%s' % self.user
 
 class AdvisorAdminUser(TimeStampedModel):
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(User, related_name="advisorname")
     department = models.CharField(max_length=50)
 
     def __unicode__(self):
-        return '%s' % self.use
+        return '%s' % self.user
+
+
+class Semester(models.Model):
+    name = models.CharField(max_length=50)
+    user = models.ForeignKey(Student)
+    courses = models.ManyToManyField('Course')
+
 
 class Trajectory(TimeStampedModel):
-    pass
+    user = models.OneToOneField(User, related_name="tj")
+    semesters = models.ManyToManyField(Semester)
+    completed = models.ManyToManyField('Course')
+
 
 class Program(TimeStampedModel):
     name = models.CharField(max_length=50)
     slug = AutoSlugField(populate_from='name')
     description = models.TextField(blank=True)
-    courses = models.ManyToManyField(MetaCourse)
+    courses = models.ManyToManyField('MetaCourse')
 
     class Meta:
         abstract = True
@@ -40,8 +50,8 @@ class Program(TimeStampedModel):
 
 
 class Major(Program):
-    gened = models.ForeignKey(GenEd)
-    concentration = models.ForeignKey(Concentration, blank=True)
+    gened = models.ForeignKey('GenEd')
+    concentration = models.ForeignKey('Concentration', blank=True)
 
 
 class Minor(Program):
@@ -62,16 +72,15 @@ class MetaCourse(TimeStampedModel):
     catalogyear = models.IntegerField()
     description = models.TextField(blank=True)
 
-    class Meta:
-        abstract = True
-
     def __unicode__(self):
         return '%s' % self.name
 
 
 class Course(MetaCourse):
-    prerequisites = models.ManyToManyField(MetaCourse)
-    corequisites = models.ManyToManyField(MetaCourse, blank=True)
+    prerequisites = models.ManyToManyField(MetaCourse,
+        blank=True, related_name='prereq+')
+    corequisites = models.ManyToManyField(MetaCourse,
+        blank=True, related_name='coreq+')
 
 
 class CourseGroup(MetaCourse):
