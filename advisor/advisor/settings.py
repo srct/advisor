@@ -39,7 +39,7 @@ INSTALLED_APPS = (
     'mainapp',
     'rest_framework',
     'south',
-    'mainapp',
+    'rest_framework_swagger',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -91,4 +91,17 @@ REST_FRAMEWORK = {
     'DEFAULT_MODEL_SERIALIZER_CLASS':
         'rest_framework.serializers.HyperlinkedModelSerializer',
 
+}
+SWAGGER_SETTINGS = {
+    "exclude_namespaces": [], # List URL namespaces to ignore
+    "api_version": '0.1',  # Specify your API's version
+    "api_path": "/api",  # Specify the path to your API not a root level
+    "enabled_methods": [  # Specify which methods to enable in Swagger UI
+        'get',
+        'post',
+        'put',
+        'delete'
+    ],
+    "is_authenticated": False,  # Set to True to enforce user authentication,
+    "is_superuser": False,  # Set to True to enforce admin only access
 }
