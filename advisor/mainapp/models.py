@@ -39,9 +39,6 @@ class Program(TimeStampedModel):
     description = models.TextField(blank=True)
     courses = models.ManyToManyField('MetaCourse')
 
-    class Meta:
-        abstract = True
-
     def __unicode__(self):
         return '%s' % self.name
 
