@@ -3,39 +3,30 @@ from django.views.generic import CreateView, ListView, DetailView, DeleteView, U
 
 from rest_framework import viewsets
 
-from mainapp.models import Trajectory, Program, Major, Minor, GenEd, Concentration, MetaCourse, Course, CourseGroup
 from mainapp.serializers import ProgramSerializer, CourseSerializer, CourseGroupSerializer, TrajectorySerializer
+from mainapp.models import Trajectory, Program, Major, Minor, GenEd, Concentration, MetaCourse, Course, CourseGroup
 # Create your views here.
 #API SHIT
 
 class ProgramViewSet(viewsets.ReadOnlyModelViewSet):
-    """
-    Read only view of Programs
-    """
     queryset = Program.objects.all()
     serializer_class = ProgramSerializer
 
 class CourseViewSet(viewsets.ReadOnlyModelViewSet):
-    """
-    Read only view of Courses
-    """
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
 
 class CourseGroupViewSet(viewsets.ReadOnlyModelViewSet):
-    """
-    Read only view of Course Groups
-    """
     queryset = CourseGroup.objects.all()
     serializer_class = CourseGroupSerializer
 
-
 class TrajectoryViewSet(viewsets.ModelViewSet):
-    """
-    Read/Writeable view of Trajectories
-    """
     queryset = Trajectory.objects.all()
     serializer_class = TrajectorySerializer
+
+# Generic Views
+def build_trajectory(request):
+    return render(request, 'build.html')
 
 #Trajectory CBVS
 class CreateTrajectory(CreateView):

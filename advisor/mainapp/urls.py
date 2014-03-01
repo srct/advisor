@@ -1,5 +1,6 @@
 from django.conf.urls import patterns, include, url
-from mainapp.views import ProgramViewSet, CourseViewSet, CourseGroupViewSet,TrajectoryViewSet
+from mainapp.views import (ProgramViewSet, CourseViewSet, CourseGroupViewSet,
+    TrajectoryViewSet, build_trajectory)
 #from .views import *
 from mainapp.models import Program, Course, CourseGroup, Trajectory
 
