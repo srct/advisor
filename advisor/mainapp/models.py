@@ -9,6 +9,7 @@ class Student(TimeStampedModel):
     tj = models.OneToOneField('Trajectory')
     dateOfGrad = models.DateField()
     advisorname = models.OneToOneField('AdvisorAdminUser')
+    coursestaken = models.ManyToManyField('Course')
 
     def __unicode__(self):
         return '%s' % self.user
@@ -25,6 +26,7 @@ class Semester(models.Model):
     number = models.IntegerField()
     user = models.ForeignKey(Student)
     courses = models.ManyToManyField('Course')
+    programs = models.ManyToManyField('Program')
 
 
 class Trajectory(TimeStampedModel):

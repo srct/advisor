@@ -21,6 +21,15 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal(u'mainapp', ['Student'])
 
+        # Adding M2M table for field coursestaken on 'Student'
+        m2m_table_name = db.shorten_name(u'mainapp_student_coursestaken')
+        db.create_table(m2m_table_name, (
+            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('student', models.ForeignKey(orm[u'mainapp.student'], null=False)),
+            ('course', models.ForeignKey(orm[u'mainapp.course'], null=False))
+        ))
+        db.create_unique(m2m_table_name, ['student_id', 'course_id'])
+
         # Adding model 'AdvisorAdminUser'
         db.create_table(u'mainapp_advisoradminuser', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
@@ -34,7 +43,7 @@ class Migration(SchemaMigration):
         # Adding model 'Semester'
         db.create_table(u'mainapp_semester', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=50)),
+            ('number', self.gf('django.db.models.fields.IntegerField')()),
             ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['mainapp.Student'])),
         ))
         db.send_create_signal(u'mainapp', ['Semester'])
@@ -47,6 +56,15 @@ class Migration(SchemaMigration):
             ('course', models.ForeignKey(orm[u'mainapp.course'], null=False))
         ))
         db.create_unique(m2m_table_name, ['semester_id', 'course_id'])
+
+        # Adding M2M table for field programs on 'Semester'
+        m2m_table_name = db.shorten_name(u'mainapp_semester_programs')
+        db.create_table(m2m_table_name, (
+            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('semester', models.ForeignKey(orm[u'mainapp.semester'], null=False)),
+            ('program', models.ForeignKey(orm[u'mainapp.program'], null=False))
+        ))
+        db.create_unique(m2m_table_name, ['semester_id', 'program_id'])
 
         # Adding model 'Trajectory'
         db.create_table(u'mainapp_trajectory', (
@@ -75,87 +93,51 @@ class Migration(SchemaMigration):
         ))
         db.create_unique(m2m_table_name, ['trajectory_id', 'course_id'])
 
-        # Adding model 'Major'
-        db.create_table(u'mainapp_major', (
+        # Adding model 'Program'
+        db.create_table(u'mainapp_program', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('created', self.gf('model_utils.fields.AutoCreatedField')(default=datetime.datetime.now)),
             ('modified', self.gf('model_utils.fields.AutoLastModifiedField')(default=datetime.datetime.now)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=50)),
             ('slug', self.gf('autoslug.fields.AutoSlugField')(unique_with=(), max_length=50, populate_from='name')),
             ('description', self.gf('django.db.models.fields.TextField')(blank=True)),
+        ))
+        db.send_create_signal(u'mainapp', ['Program'])
+
+        # Adding M2M table for field courses on 'Program'
+        m2m_table_name = db.shorten_name(u'mainapp_program_courses')
+        db.create_table(m2m_table_name, (
+            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('program', models.ForeignKey(orm[u'mainapp.program'], null=False)),
+            ('metacourse', models.ForeignKey(orm[u'mainapp.metacourse'], null=False))
+        ))
+        db.create_unique(m2m_table_name, ['program_id', 'metacourse_id'])
+
+        # Adding model 'Major'
+        db.create_table(u'mainapp_major', (
+            (u'program_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['mainapp.Program'], unique=True, primary_key=True)),
             ('gened', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['mainapp.GenEd'])),
             ('concentration', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['mainapp.Concentration'], blank=True)),
         ))
         db.send_create_signal(u'mainapp', ['Major'])
 
-        # Adding M2M table for field courses on 'Major'
-        m2m_table_name = db.shorten_name(u'mainapp_major_courses')
-        db.create_table(m2m_table_name, (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('major', models.ForeignKey(orm[u'mainapp.major'], null=False)),
-            ('metacourse', models.ForeignKey(orm[u'mainapp.metacourse'], null=False))
-        ))
-        db.create_unique(m2m_table_name, ['major_id', 'metacourse_id'])
-
         # Adding model 'Minor'
         db.create_table(u'mainapp_minor', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('created', self.gf('model_utils.fields.AutoCreatedField')(default=datetime.datetime.now)),
-            ('modified', self.gf('model_utils.fields.AutoLastModifiedField')(default=datetime.datetime.now)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=50)),
-            ('slug', self.gf('autoslug.fields.AutoSlugField')(unique_with=(), max_length=50, populate_from='name')),
-            ('description', self.gf('django.db.models.fields.TextField')(blank=True)),
+            (u'program_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['mainapp.Program'], unique=True, primary_key=True)),
         ))
         db.send_create_signal(u'mainapp', ['Minor'])
 
-        # Adding M2M table for field courses on 'Minor'
-        m2m_table_name = db.shorten_name(u'mainapp_minor_courses')
-        db.create_table(m2m_table_name, (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('minor', models.ForeignKey(orm[u'mainapp.minor'], null=False)),
-            ('metacourse', models.ForeignKey(orm[u'mainapp.metacourse'], null=False))
-        ))
-        db.create_unique(m2m_table_name, ['minor_id', 'metacourse_id'])
-
         # Adding model 'GenEd'
         db.create_table(u'mainapp_gened', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('created', self.gf('model_utils.fields.AutoCreatedField')(default=datetime.datetime.now)),
-            ('modified', self.gf('model_utils.fields.AutoLastModifiedField')(default=datetime.datetime.now)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=50)),
-            ('slug', self.gf('autoslug.fields.AutoSlugField')(unique_with=(), max_length=50, populate_from='name')),
-            ('description', self.gf('django.db.models.fields.TextField')(blank=True)),
+            (u'program_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['mainapp.Program'], unique=True, primary_key=True)),
         ))
         db.send_create_signal(u'mainapp', ['GenEd'])
 
-        # Adding M2M table for field courses on 'GenEd'
-        m2m_table_name = db.shorten_name(u'mainapp_gened_courses')
-        db.create_table(m2m_table_name, (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('gened', models.ForeignKey(orm[u'mainapp.gened'], null=False)),
-            ('metacourse', models.ForeignKey(orm[u'mainapp.metacourse'], null=False))
-        ))
-        db.create_unique(m2m_table_name, ['gened_id', 'metacourse_id'])
-
         # Adding model 'Concentration'
         db.create_table(u'mainapp_concentration', (
-            (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('created', self.gf('model_utils.fields.AutoCreatedField')(default=datetime.datetime.now)),
-            ('modified', self.gf('model_utils.fields.AutoLastModifiedField')(default=datetime.datetime.now)),
-            ('name', self.gf('django.db.models.fields.CharField')(max_length=50)),
-            ('slug', self.gf('autoslug.fields.AutoSlugField')(unique_with=(), max_length=50, populate_from='name')),
-            ('description', self.gf('django.db.models.fields.TextField')(blank=True)),
+            (u'program_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['mainapp.Program'], unique=True, primary_key=True)),
         ))
         db.send_create_signal(u'mainapp', ['Concentration'])
-
-        # Adding M2M table for field courses on 'Concentration'
-        m2m_table_name = db.shorten_name(u'mainapp_concentration_courses')
-        db.create_table(m2m_table_name, (
-            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('concentration', models.ForeignKey(orm[u'mainapp.concentration'], null=False)),
-            ('metacourse', models.ForeignKey(orm[u'mainapp.metacourse'], null=False))
-        ))
-        db.create_unique(m2m_table_name, ['concentration_id', 'metacourse_id'])
 
         # Adding model 'MetaCourse'
         db.create_table(u'mainapp_metacourse', (
@@ -172,6 +154,9 @@ class Migration(SchemaMigration):
         # Adding model 'Course'
         db.create_table(u'mainapp_course', (
             (u'metacourse_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['mainapp.MetaCourse'], unique=True, primary_key=True)),
+            ('dept', self.gf('django.db.models.fields.CharField')(max_length=50)),
+            ('courseid', self.gf('django.db.models.fields.IntegerField')()),
+            ('credits', self.gf('django.db.models.fields.IntegerField')()),
         ))
         db.send_create_signal(u'mainapp', ['Course'])
 
@@ -214,6 +199,9 @@ class Migration(SchemaMigration):
         # Deleting model 'Student'
         db.delete_table(u'mainapp_student')
 
+        # Removing M2M table for field coursestaken on 'Student'
+        db.delete_table(db.shorten_name(u'mainapp_student_coursestaken'))
+
         # Deleting model 'AdvisorAdminUser'
         db.delete_table(u'mainapp_advisoradminuser')
 
@@ -222,6 +210,9 @@ class Migration(SchemaMigration):
 
         # Removing M2M table for field courses on 'Semester'
         db.delete_table(db.shorten_name(u'mainapp_semester_courses'))
+
+        # Removing M2M table for field programs on 'Semester'
+        db.delete_table(db.shorten_name(u'mainapp_semester_programs'))
 
         # Deleting model 'Trajectory'
         db.delete_table(u'mainapp_trajectory')
@@ -232,29 +223,23 @@ class Migration(SchemaMigration):
         # Removing M2M table for field completed on 'Trajectory'
         db.delete_table(db.shorten_name(u'mainapp_trajectory_completed'))
 
+        # Deleting model 'Program'
+        db.delete_table(u'mainapp_program')
+
+        # Removing M2M table for field courses on 'Program'
+        db.delete_table(db.shorten_name(u'mainapp_program_courses'))
+
         # Deleting model 'Major'
         db.delete_table(u'mainapp_major')
-
-        # Removing M2M table for field courses on 'Major'
-        db.delete_table(db.shorten_name(u'mainapp_major_courses'))
 
         # Deleting model 'Minor'
         db.delete_table(u'mainapp_minor')
 
-        # Removing M2M table for field courses on 'Minor'
-        db.delete_table(db.shorten_name(u'mainapp_minor_courses'))
-
         # Deleting model 'GenEd'
         db.delete_table(u'mainapp_gened')
 
-        # Removing M2M table for field courses on 'GenEd'
-        db.delete_table(db.shorten_name(u'mainapp_gened_courses'))
-
         # Deleting model 'Concentration'
         db.delete_table(u'mainapp_concentration')
-
-        # Removing M2M table for field courses on 'Concentration'
-        db.delete_table(db.shorten_name(u'mainapp_concentration_courses'))
 
         # Deleting model 'MetaCourse'
         db.delete_table(u'mainapp_metacourse')
@@ -321,18 +306,15 @@ class Migration(SchemaMigration):
             'user': ('django.db.models.fields.related.OneToOneField', [], {'related_name': "'advisorname'", 'unique': 'True', 'to': u"orm['auth.User']"})
         },
         u'mainapp.concentration': {
-            'Meta': {'object_name': 'Concentration'},
-            'courses': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['mainapp.MetaCourse']", 'symmetrical': 'False'}),
-            'created': ('model_utils.fields.AutoCreatedField', [], {'default': 'datetime.datetime.now'}),
-            'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'modified': ('model_utils.fields.AutoLastModifiedField', [], {'default': 'datetime.datetime.now'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
-            'slug': ('autoslug.fields.AutoSlugField', [], {'unique_with': '()', 'max_length': '50', 'populate_from': "'name'"})
+            'Meta': {'object_name': 'Concentration', '_ormbases': [u'mainapp.Program']},
+            u'program_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['mainapp.Program']", 'unique': 'True', 'primary_key': 'True'})
         },
         u'mainapp.course': {
             'Meta': {'object_name': 'Course', '_ormbases': [u'mainapp.MetaCourse']},
             'corequisites': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "'coreq+'", 'blank': 'True', 'to': u"orm['mainapp.MetaCourse']"}),
+            'courseid': ('django.db.models.fields.IntegerField', [], {}),
+            'credits': ('django.db.models.fields.IntegerField', [], {}),
+            'dept': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
             u'metacourse_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['mainapp.MetaCourse']", 'unique': 'True', 'primary_key': 'True'}),
             'prerequisites': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "'prereq+'", 'blank': 'True', 'to': u"orm['mainapp.MetaCourse']"})
         },
@@ -343,26 +325,14 @@ class Migration(SchemaMigration):
             'numneeded': ('django.db.models.fields.IntegerField', [], {})
         },
         u'mainapp.gened': {
-            'Meta': {'object_name': 'GenEd'},
-            'courses': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['mainapp.MetaCourse']", 'symmetrical': 'False'}),
-            'created': ('model_utils.fields.AutoCreatedField', [], {'default': 'datetime.datetime.now'}),
-            'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'modified': ('model_utils.fields.AutoLastModifiedField', [], {'default': 'datetime.datetime.now'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
-            'slug': ('autoslug.fields.AutoSlugField', [], {'unique_with': '()', 'max_length': '50', 'populate_from': "'name'"})
+            'Meta': {'object_name': 'GenEd', '_ormbases': [u'mainapp.Program']},
+            u'program_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['mainapp.Program']", 'unique': 'True', 'primary_key': 'True'})
         },
         u'mainapp.major': {
-            'Meta': {'object_name': 'Major'},
+            'Meta': {'object_name': 'Major', '_ormbases': [u'mainapp.Program']},
             'concentration': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['mainapp.Concentration']", 'blank': 'True'}),
-            'courses': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['mainapp.MetaCourse']", 'symmetrical': 'False'}),
-            'created': ('model_utils.fields.AutoCreatedField', [], {'default': 'datetime.datetime.now'}),
-            'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'gened': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['mainapp.GenEd']"}),
-            u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'modified': ('model_utils.fields.AutoLastModifiedField', [], {'default': 'datetime.datetime.now'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
-            'slug': ('autoslug.fields.AutoSlugField', [], {'unique_with': '()', 'max_length': '50', 'populate_from': "'name'"})
+            u'program_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['mainapp.Program']", 'unique': 'True', 'primary_key': 'True'})
         },
         u'mainapp.metacourse': {
             'Meta': {'object_name': 'MetaCourse'},
@@ -375,7 +345,11 @@ class Migration(SchemaMigration):
             'slug': ('autoslug.fields.AutoSlugField', [], {'unique_with': '()', 'max_length': '50', 'populate_from': "'name'"})
         },
         u'mainapp.minor': {
-            'Meta': {'object_name': 'Minor'},
+            'Meta': {'object_name': 'Minor', '_ormbases': [u'mainapp.Program']},
+            u'program_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['mainapp.Program']", 'unique': 'True', 'primary_key': 'True'})
+        },
+        u'mainapp.program': {
+            'Meta': {'object_name': 'Program'},
             'courses': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['mainapp.MetaCourse']", 'symmetrical': 'False'}),
             'created': ('model_utils.fields.AutoCreatedField', [], {'default': 'datetime.datetime.now'}),
             'description': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
@@ -388,12 +362,14 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'Semester'},
             'courses': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['mainapp.Course']", 'symmetrical': 'False'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'name': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
+            'number': ('django.db.models.fields.IntegerField', [], {}),
+            'programs': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['mainapp.Program']", 'symmetrical': 'False'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['mainapp.Student']"})
         },
         u'mainapp.student': {
             'Meta': {'object_name': 'Student'},
             'advisorname': ('django.db.models.fields.related.OneToOneField', [], {'to': u"orm['mainapp.AdvisorAdminUser']", 'unique': 'True'}),
+            'coursestaken': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['mainapp.Course']", 'symmetrical': 'False'}),
             'created': ('model_utils.fields.AutoCreatedField', [], {'default': 'datetime.datetime.now'}),
             'dateOfGrad': ('django.db.models.fields.DateField', [], {}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
