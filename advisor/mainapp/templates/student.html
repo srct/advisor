@@ -1,9 +1,37 @@
 {% extends 'layouts/base.html' %}
 
 {% block title %}
-
+Student Name | YourSchool Advisor
 {% endblock %}
 
 {% block content %}
+
+{% load gravatar %}
+
+<div class="row">
+  <div class="col-md-4">
+    <img class="img-circle img-responsive center-block" src="{% gravatar url 'student@theiremail.address' 200 %}">
+  </div>
+  <div class="col-md-4">
+    <h2>Student Name</h2>
+  </div>
+  <div class="col-md-4">
+    <button type="button" class="btn btn-primary">Edit My Info</button>
+  </div>
+</div>
+
+<legend>My Trajectories</legend>
+
+<div class="row">
+  <div class="row-md-6">
+    <h4>Trajectory Name</h4>
+  </div>
+  <div class="row-md-6">
+    <button type="button" class="btn btn-primary">Edit</button>
+    <button type="button" class="btn btn-default">Public</button>
+    <button type="button" class="btn btn-default">Private</button>
+    <button type="button" class="btn btn-danger">Delete</button>
+  </div>
+</div>
 
 {% endblock %}
