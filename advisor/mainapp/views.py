@@ -9,19 +9,31 @@ from mainapp.serializers import ProgramSerializer, CourseSerializer, CourseGroup
 #API SHIT
 
 class ProgramViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    Read only view of Programs
+    """
     queryset = Program.objects.all()
     serializer_class = ProgramSerializer
 
 class CourseViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    Read only view of Courses
+    """
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
 
 class CourseGroupViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    Read only view of Course Groups
+    """
     queryset = CourseGroup.objects.all()
     serializer_class = CourseGroupSerializer
 
 
 class TrajectoryViewSet(viewsets.ModelViewSet):
+    """
+    Read/Writeable view of Trajectories
+    """
     queryset = Trajectory.objects.all()
     serializer_class = TrajectorySerializer
 
