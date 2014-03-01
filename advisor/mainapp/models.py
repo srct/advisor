@@ -8,10 +8,20 @@ from django.contrib.auth.models import User
 
 class AdvisorUser(TimeStampedModel):
     user = models.OneToOneField(User)
+    major = models.ForeignKey(Major)
     tj = models.ForeignKey(Trajectory)
+    dateOfGrad = models.DateField()
+    advisorMan = models.ForeignKey(AdvisorAdminUser):
 
     def __unicode__(self):
         return '%s' % self.user
+
+class AdvisorAdminUser(TimeStampedModel):
+    user = models.OneToOneField(User)
+    department = models.CharField(max_length=50)
+
+    def __unicode__(self):
+        return '%s' % self.use
 
 class Trajectory(TimeStampedModel):
     pass
