@@ -3,8 +3,8 @@ from django.views.generic import CreateView, ListView, DetailView, DeleteView, U
 
 from rest_framework import viewsets
 
-from mainapp.serializers import ProgramSerializer, CourseSerializer, CourseGroupSerializer, TrajectorySerializer
 from mainapp.models import Trajectory, Program, Major, Minor, GenEd, Concentration, MetaCourse, Course, CourseGroup
+from mainapp.serializers import ProgramSerializer, CourseSerializer, CourseGroupSerializer, TrajectorySerializer
 # Create your views here.
 #API SHIT
 
@@ -12,16 +12,16 @@ class ProgramViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Program.objects.all()
     serializer_class = ProgramSerializer
 
-class CourseSerializer(viewsets.ReadOnlyModelViewSet):
+class CourseViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
 
-class CourseGroupSerializer(viewsets.ReadOnlyModelViewSet):
+class CourseGroupViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = CourseGroup.objects.all()
     serializer_class = CourseGroupSerializer
 
 
-class TrajectorySerializer(viewsets.ModelViewSet):
+class TrajectoryViewSet(viewsets.ModelViewSet):
     queryset = Trajectory.objects.all()
     serializer_class = TrajectorySerializer
 
