@@ -93,6 +93,11 @@ STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.AppDirectoriesFinder"
 )
 
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR, 'templates/'),
+    os.path.join(BASE_DIR, 'mainapp/templates/'),
+)
+
 REST_FRAMEWORK = {
     # Use hyperlinked styles by default.
     # Only used if the `serializer_class` attribute is not set on a view.
