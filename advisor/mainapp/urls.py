@@ -1,15 +1,15 @@
 from django.conf.urls import patterns, include, url
-from mainapp import views
+from mainapp.views import ProgramViewSet, CourseViewSet, CourseGroupViewSet,TrajectoryViewSet
 #from .views import *
 from mainapp.models import Program, Course, CourseGroup, Trajectory
 
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
-router.register(r'programs', views.ProgramViewSet)
-router.register(r'courses', views.CourseViewSet)
-router.register(r'coursegroups', views.CourseGroupViewSet)
-router.register(r'trajectories', views.TrajectoryViewSet)
+router.register(r'programs', ProgramViewSet)
+router.register(r'courses', CourseViewSet)
+router.register(r'coursegroups', CourseGroupViewSet)
+router.register(r'trajectories', TrajectoryViewSet)
 
 urlpatterns = patterns('',
     # Examples:
