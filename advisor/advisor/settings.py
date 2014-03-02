@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'south',
     'django_gravatar',
     'autocomplete_light',
+    'haystack',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -125,3 +126,11 @@ SWAGGER_SETTINGS = {
 LOGIN_URL = '/login/'
 LOGOUT_URL = '/logout/'
 LOGIN_REDIRECT_URL = '/'
+
+HAYSTACK_CONNECTIONS = {
+    'default': {
+        'ENGINE': 'haystack.backends.whoosh_backend.WhooshEngine',
+        'PATH': os.path.join(os.path.dirname(__file__), 'whoosh_index'),
+    },
+}
+

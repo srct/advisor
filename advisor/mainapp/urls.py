@@ -28,5 +28,6 @@ urlpatterns = patterns('',
     #name='detail-student'),
     url(r'^profile/', profile, name='profile-detail'), 
     #name='profile'),
+    url(r'^search/', include('haystack.urls')),
 )
 
