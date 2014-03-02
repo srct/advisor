@@ -22,8 +22,8 @@ def build_trajectory(request):
     #process
     if request.method == "POST":
         form = StartTrajectoryForm(request.POST)
-        for x,v in form.fields:
-            print x,v
+        majors = dict(form.fields['major'])[form]
+        print majors
         #majors = form.fie
     return render_to_response('build.html', {
     })
