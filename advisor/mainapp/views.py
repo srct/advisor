@@ -30,6 +30,11 @@ def compare(request):
     return render_to_response('compare.html', {
     })
 
+# BEN MAKE THIS A CBV OR SOMETHING IDK
+def search(request):
+    return render_to_response('search.html', {
+    })
+
 #API SHIT
 @login_required
 def profile(request):
