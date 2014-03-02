@@ -184,6 +184,7 @@ def genTrajectories(taken, programs, user):
     taken = set(taken)
     print taken
     sem = Semester(number=0, user=user)
+    sem.save()
     for takencourse in taken:
         takencourse.semester=sem
     sem.courses = taken
