@@ -43,7 +43,7 @@ def profile(request):
 
     return render_to_response('profile.html', {
             "user" : current_user,
-            "full_name" : current_user.full_name,
+            "full_name" : current_user.user.full_name,
             "advisorname" : current_user.advisorname,
     },
     context_instance = RequestContext(request),
