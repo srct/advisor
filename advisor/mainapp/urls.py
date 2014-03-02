@@ -23,7 +23,7 @@ urlpatterns = patterns('',
     url(r'^build/', build_trajectory, name='build'),
     #url(r'^student/(?P<slug>[^/]+)/$', DetailStudent.as_view(),
     #name='detail-student'),
-    #url(r'^profile/(?P<slug>[^/]+)/$', ProfileView.as_view(), 
+    url(r'^profile/', profile, name='profile-detail'), 
     #name='profile'),
 )
 

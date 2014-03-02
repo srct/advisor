@@ -1,16 +1,13 @@
 {% extends 'layouts/base.html' %}
+{% block title %}
+{% user.full_name %} | {% user.advisorname %}
+{% endblock %}
 {% block content %}
-<div class="container">
-    <div class="row clearfix">
-        <div class="col-md-12 column">
-            <h2>
-               Welcome User to your profile! 
-            </h2>
-        </div>
-    </div>
+{% load gravator %}
     <div class="row clearfix">
         <div class="col-md-4 column">
-            <img alt="140x140" src="http://lorempixel.com/140/140/" />
+ <img class="img-circle img-responsive center-block" src="{% gravatar url
+ '{% user.email %}' 200 %}">
         </div>
         <div class="col-md-4 column">
         </div>
