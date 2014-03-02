@@ -1,46 +1,68 @@
 {% extends 'layouts/base.html' %}
 {% block content %}
 {% load gravatar %}
-    <div class="row clearfix">
-        <div class="col-md-4 column">
- <img class="img-circle img-responsive center-block" src="{% gravatar url
+<div class="row clearfix">
+  <div class="col-md-4 column">
+     <img class="img-circle img-responsive center-block" src="{% gravatar url
  '{{ current_user.user.email }}' 200 %}">
-        </div>
-        <div class="col-md-4 column">
-        </div>
-        <div class="col-md-4 column">
-        </div>
-    </div>
-    <div class="row clearfix">
-        <div class="col-md-12 column">
-<h3>
-Hello {{ firstname }}! | Your advisor is:  {{ advisorname }}
-</h3>
-            <form role="form">
-            </form>
-        </div>
-    </div>
-    <div class="row clearfix">
-        <div class="col-md-12 column">
-            <h5> Courses Taken </h5>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>
-                            Course Number
-                        </th>
-                        <th>
-                            Course Name
-                        </th>
-                        <th>
-                            Semester Taken
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </div>
-    </div>
+  </div>
+  <div class="col-md-4 column">
+  </div>
+  <div class="col-md-4 column">
+  </div>
+</div>
+<div class="row clearfix">
+  <div class="col-md-12 column">
+    <h3>
+      Hello {{ firstname }}! | Your advisor is:  {{ advisorname }}
+    </h3>
+    <form role="form">
+    </form>
+  </div>
+</div>
+<div class="row clearfix">
+  <div class="col-md-12 column">
+    <legend>Courses Taken</legend>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>
+            Course Number
+          </th>
+          <th>
+            Course Name
+          </th>
+          <th>
+            Semester Taken
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="row clearfix">
+  <div class="col-md-12 column">
+    <legend>My Trajectories</legend>
+  </div>
+  <div class="row-md-6">
+    <h4><a href="#">Trajectory One Name</a></h4>
+  </div>
+  <div class="row-md-6">
+    <button type="button" class="btn btn-primary">Edit</button>
+    <button type="button" class="btn btn-default">Public</button>
+    <button type="button" class="btn btn-primary">Private</button>
+    <button type="button" class="btn btn-danger">Delete</button>
+  </div>
+  <div class="row-md-6">
+    <h4><a href="#">Trajectory Two Name</a></h4>
+  </div>
+  <div class="row-md-6">
+    <button type="button" class="btn btn-primary">Edit</button>
+    <button type="button" class="btn btn-default">Public</button>
+    <button type="button" class="btn btn-primary">Private</button>
+    <button type="button" class="btn btn-danger">Delete</button>
+  </div>
 </div>
 {% endblock %}
