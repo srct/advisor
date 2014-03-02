@@ -9,7 +9,7 @@ CourseGroupSerializer, TrajectorySerializer, SemesterSerializer,
 BuildResponseSerializer)
 from mainapp.models import (Trajectory, Program, Major, Minor, GenEd,
 Concentration, MetaCourse, Course, CourseGroup, Semester, BuildResponse)
-from mainapp.forms import StartTrajectoryForm
+from mainapp.forms import StartTrajectoryForm, StudentForm
 # Create your views here.
 #FBV's
 # Generic Views
@@ -59,6 +59,10 @@ class BuildResponseViewSet(viewsets.ModelViewSet):
 #FORM CBV's
 
 #Trajectory CBVS
+class DetailBuildResponse(DetailView):
+    model = BuildResponse
+    template_name = 'build.html'
+
 class CreateTrajectory(CreateView):
     model = Trajectory
 #To Impement
@@ -130,3 +134,11 @@ class ListCourseGroup(ListView):
     model = CourseGroup
 class DetailCourseGroup(DetailView):
     model = CourseGroup
+class DetailStudent(DetailView):
+    model = Student
+    template_name = 'student.html'
+
+class CoursesTaken(UpdateView):
+    model = Student
+    template_name = 'student_form.html'
+    form_class = StudentForm
