@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.views.generic import (CreateView, ListView, DetailView, DeleteView,
 UpdateView, FormView)
+from django.http import HttpResponse
+from django.core.servers.basehttp import FileWrapper
 
 from rest_framework import viewsets
 from braces.views import LoginRequiredMixin
@@ -48,6 +50,14 @@ class StartTrajectoryView(FormView):
     template_name = 'new.html'
     form_class = StartTrajectoryForm
 
+def download(request):
+    import urllib2
+    myfile = urllib2.Request('http://advisor.hackmason.org/trajectory/1/', headers =
+    {'Accept' : 'application/json'})
+    response = HttpResponse(FileWrapper(myfile.getvalue()),
+    content_type='application/')
+    response['Content-Disposition'] = 'attachment; filename=myfile.zip'
+    return response
 # BEN MAKE THIS A CBV OR SOMETHING IDK
 def search(request):
     return render_to_response('search.html', {
