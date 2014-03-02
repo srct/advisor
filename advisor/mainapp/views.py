@@ -38,9 +38,12 @@ def build_trajectory(request):
         user_in = Student.objects.get(user__username=request.user.username)
         trac = genTrajectories(taken=taken,programs=programs,user=user_in)
         #majors = form.fie
-    return render_to_response('build.html', {
+        return render_to_response('build.html', {
         'trac' : trac,
-    })
+        })
+    else:
+        reutrn render_to_response('build.html', {
+        })
 class StartTrajectoryView(FormView):
     template_name = 'new.html'
     form_class = StartTrajectoryForm
