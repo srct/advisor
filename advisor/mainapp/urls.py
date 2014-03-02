@@ -12,7 +12,7 @@ router.register(r'courses', CourseViewSet)
 router.register(r'coursegroups', CourseGroupViewSet)
 router.register(r'trajectories', TrajectoryViewSet)
 router.register(r'semesters', SemesterViewSet)
-router.register(r'buildresponses', BuildResponseViewSet
+router.register(r'buildresponses', BuildResponseViewSet)
 
 urlpatterns = patterns('',
     # Examples:
