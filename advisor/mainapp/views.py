@@ -13,7 +13,8 @@ from mainapp.forms import StartTrajectoryForm
 #FBV's
 # Generic Views
 def build_trajectory(request, majors, minors):
-    return render(request, 'build.html')
+    #process
+    return HttpResponse(semester_key)
 def searchMajorMinor(request):
     #query
     if request.method == 'POST':
