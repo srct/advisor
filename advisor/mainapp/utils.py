@@ -13,6 +13,31 @@ def programCourses(program):
 
     return courses
 
+def genDepTree(course):
+    toscan = []
+    courseset = set(course)
+    for prerequisite in course.prerequisites:
+        toscan.add(course)
+    for corequisite in course.corequisites:
+        toscan.add(course)
+
+    for elem in toscan:
+        recursiveDepTree(elem, courseset)
+
+def recursiveDepTree(course, courseset):
+    toscan = []
+    courseset.add(course)
+    for prerequisite in course.prerequisites:
+        toscan.append(course)
+    for corequisite in course.corequisites:
+        toscan.append(course)
+
+    if len(toscan) == 0:
+        return
+    for elem in toscan:
+        if elem not in courseset:
+            recursiveDepTree(elem, courseset)
+
 ### creating a trajectory
 
 #def maxProgramsAllowed():
@@ -114,6 +139,7 @@ def nextCourses(remainingReqCourses, taken):
             if req in taken:
                 nextcourses.append(course)
 
+
     return nextCourses
 
 # IMPLEMENT THIS IN JS!
@@ -150,25 +176,35 @@ def enoughCredits(previousCourses, numRequired):
 
     return enoughcredits
 
-def generatedTrajectory(taken, program):
+'''def generatedTrajectory(taken, programs, user):
     
-    generatedTrajectory = []
-
+    tj = Trajectory(user=user, semesters=[])
+    programCourses = []
     # get the course's programs
-    programCourses = programCourses( program )
+    for program in programs:
+        programCourses.append(programCourses( program ))
 
     # find the weights of all of the programs
     courseWeighting( programCourses )
 
-    # get the courses you have to take next
-    remainingReqCourses( taken, programCourses )
-    requirementsFulfilled( taken, program )
-    nextCourses( remainingReqCourses, taken )
+    while len(remainingReqCourses) > 0:
+        courseWeighting(programCourses)
+
+        # get the courses you have to take next
+        remainingReqCourses( taken, programCourses )
+        requirementsFulfilled( taken, program )
+        nextCourses( remainingReqCourses, taken )
+        # TODO: pick five highest-weighted
+        #
+        nextsem = Semester(number=len(tj.semesters)+1, user=user,
+            courses=semcourses, programs=program, 
+
 
     # of those, pick five of the heaviest
     ### IMPLEMENT THIS
 
     # associate courseWeights with nextCourses
+    courseWeighting(nextCourses()
     # add a list of courses with the five highest weights from nextCourses to
     # generated Trajectory
     # add these new courses to taken
@@ -185,7 +221,7 @@ def generatedTrajectory(taken, program):
 
     # hooray!
     return generatedTrajectory
-
+'''
 ### student page
 
 def allTrajectories(topSemester):
