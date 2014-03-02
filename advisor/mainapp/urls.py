@@ -1,10 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.views.generic import TemplateView
-from mainapp.views import (ProgramViewSet, CourseViewSet, CourseGroupViewSet,
-TrajectoryViewSet, build_trajectory, SemesterViewSet, BuildResponseViewSet,
-DetailStudent, ProfileView, RequirementViewSet)
-from mainapp.models import (Program, Course, CourseGroup, Trajectory, Semester,
-BuildResponse, Student, Requirement)
+from mainapp.views import * 
+from mainapp.models import * 
 
 from rest_framework.routers import DefaultRouter
 
@@ -15,7 +12,7 @@ router.register(r'coursegroups', CourseGroupViewSet)
 router.register(r'trajectories', TrajectoryViewSet)
 router.register(r'semesters', SemesterViewSet)
 router.register(r'buildresponses', BuildResponseViewSet)
-router.register(r'requirements', RequirementViewSet
+router.register(r'requirements', RequirementViewSet)
 
 urlpatterns = patterns('',
     # Examples:
