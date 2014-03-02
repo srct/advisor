@@ -121,3 +121,6 @@ SWAGGER_SETTINGS = {
     "is_authenticated": False,  # Set to True to enforce user authentication,
     "is_superuser": False,  # Set to True to enforce admin only access
 }
+LOGIN_URL = '/login'
+LOGOUT_URL = '/logout'
+
