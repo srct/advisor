@@ -16,22 +16,25 @@ def requirementFulfilled():
     """ is this handled in the models? if a requirement if fulfilled, then don't look at thoses classes again """
     return True
 
-# add to a list of requirements filled
+#def alreadyTaken():
+#    """ return all of the courses that a student has already taken so far
+#        in the trajectory """
+#    return True
 
-def remainingReqCourses():
-    """ returns the remaining required courses given previous courses taken """
+def remainingReqCourses(alreadyTaken, program):
+    """ returns the remaining required courses for a program given
+    the already taken courses """
 
-    return True
+    alreadyTaken = set(alreadyTaken)
+    programCourses = set(program.requirements.coursegroup.courses)
 
-def previousCourses():
-    """ return all of the courses that a student has already taken so far
-        in the trajectory """
-    # it would unfortunately be really hard for this to be saved somewhere
-    return True
+    remainingReqCourses = intersection(alreadyTaken, programCourses)
 
-def nextCourses(remainingReqCourses, previousCourses):
+    return remainingReqCourses
+
+def nextCourses(remainingReqCourses, alreadyTaken):
     """ which courses you can take next based on prereqs and coreqs, given
-        previous courses and remaining required courses """
+        already taken courses and remaining required courses """
     nextCourses = []
     for course in remainingReqCourses:
         reqs = set()
