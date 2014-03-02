@@ -3,6 +3,7 @@ from autoslug import AutoSlugField
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class Student(TimeStampedModel):
     user = models.OneToOneField(User)
     programs = models.ManyToManyField('Program')
@@ -14,6 +15,7 @@ class Student(TimeStampedModel):
 
     def __unicode__(self):
         return '%s' % self.user
+
 
 class AdvisorAdminUser(TimeStampedModel):
     user = models.OneToOneField(User, related_name="advisorname")
@@ -95,7 +97,7 @@ class Course(MetaCourse):
     corequisites = models.ManyToManyField(MetaCourse,
         blank=True, related_name='coreq+')
     credits = models.IntegerField()
-    
+
     def __unicode__(self):
         return '%s %s' % (self.dept, self.courseid)
 
@@ -103,6 +105,7 @@ class Course(MetaCourse):
 class CourseGroup(MetaCourse):
     courses = models.ManyToManyField(Course)
     numneeded = models.IntegerField("Number Needed")
+
 
 class BuildResponse(TimeStampedModel):
     semester = models.ForeignKey(Semester)
