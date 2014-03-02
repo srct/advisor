@@ -2,13 +2,14 @@ var advisor = advisor || {};
 
 advisor.CourseCollectionView = Backbone.View.extend({
 
-  el: '#program3',
   elements: [],
 
   addOne: function(course) {
     var view = new advisor.CourseView({ model: course });
-    console.log(this.$el);
-    this.$el.append(view.render().el);
+    // Fix bug where element render multiple times
+    var elm = view.render().el
+    if(!($('#' + elm.id).length))
+      this.$el.append(elm);
   },
 
   // Add all items in the **Todos** collection at once.

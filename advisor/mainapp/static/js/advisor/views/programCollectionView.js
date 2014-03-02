@@ -14,7 +14,6 @@ advisor.ProgramCollectionView = Backbone.View.extend({
     this.$el.append(el);
   },
 
-  // Add all items in the **Todos** collection at once.
   addAll: function() {
     this.$el.html('');
     advisor.Programs.each(this.addOne, this);
