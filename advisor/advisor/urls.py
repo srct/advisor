@@ -11,6 +11,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
     url(r'^', include('mainapp.urls')),
+    url(r'^', include('compare.urls')),
     url(r'^autocomplete/', include('autocomplete_light.urls')),
     url(r'^login/$', 'django.contrib.auth.views.login', {
         'template_name': 'login.html'
