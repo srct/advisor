@@ -1944,7 +1944,7 @@ fieldset[disabled] .input-group-btn .btn-default.active {
   font-size: 18px;
   line-height: 1.042;
   font-weight: 700;
-  padding: 10px 16px;
+  padding: 0px 16px;
 }
 .navbar-brand > [class*="fui-"] {
   font-size: 19px;
