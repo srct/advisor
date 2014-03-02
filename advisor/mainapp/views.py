@@ -38,7 +38,7 @@ def searchMajorMinor(request):
 #API SHIT
 @login_required
 def profile(request):
-    current_user = Student.objects.get(user__username=request.user.username)
+    current_user = get_object_or_404(Student,user__username=request.user.username)
 
     return render_to_response('profile.html', {
             "user" : current_user,
