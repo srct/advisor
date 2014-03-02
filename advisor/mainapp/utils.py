@@ -131,7 +131,7 @@ def nextCourses(remainingReqCourses, taken):
     nextcourses = []
     for course in remainingReqCourses:
         reqs = set()
-        c = Course.get(title=course)
+        c = Course.objects.get(title=course)
         for prereq in c.prerequisites:
             reqs.add(prereq)
         #for coreq in course.coreq:
