@@ -110,8 +110,8 @@ def requirementsFulfilled(taken, program):
     taken = set(taken)
     requirements = program.requirements
 
-    for requirement in requirements:
-        for coursegroup in requirement.coursegroup:
+    for requirement in requirements.all():
+        for courses in requirement.courses.all():
             courseRequirements = set(coursegroup.courses)
             requirementCoursesTaken = courseRequirements.intersection(alreadyTaken)
 
@@ -157,7 +157,7 @@ def nextCourses(remainingReqCourses, taken):
                 nextcourses.append(course)
 
 
-    return nextCourses
+    return nextcourses
 
 # IMPLEMENT THIS IN JS!
 #def maxCreditsAllowed():
@@ -219,20 +219,29 @@ def genTrajectories(taken, programs, user):
         availableCourses=nextCourses(remainingCourses, taken)
         semclasses=[]
         for i in xrange(5):
-            doneclass = availableCourses.pop()
-            semclasses.append(doneclass)
-            taken.add(doneclass)
-        newsem = Semester(number=sem.number+1, user=user, courses=semclasses,
-            programs=programs)
-        tj.semesters.append(newsem)
+            try:
+                doneclass = availableCourses.pop()
+                semclasses.append(doneclass)
+                taken.add(doneclass)
+            except:
+                break
+        newsem = Semester(number=sem.number+1, user=user)
+        newsem.save()
+        newsem.courses = semclasses
+        newsem.programs = programs
+        newsem.save()
+        sem.nextsemester = newsem
+        #tj.semesters+=[newsem]
         sem = newsem
         
         failed=False
-        for program in programs:
-            if requirementsFulfilled(program, taken) != program.requirements:
-                failed=True
-        if not failed:
-             break
+        #for program in programs:
+        #    if requirementsFulfilled(taken, program) != program.requirements:
+        #        failed=True
+        #if not failed:
+        #     break
+        if enoughCredits(taken, 120):
+            break
     return tj
             
     
