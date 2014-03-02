@@ -21,7 +21,9 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
     url(r'^', include(router.urls)),
     url(r'^build/', build_trajectory, name='build'),
-    url(r'^student/?(<pk>[0-9]+)/$', DetailStudent.as_view(),
+    url(r'^student/?P(<pk>[0-9]+)/$', DetailStudent.as_view(),
     name='detail-student'),
+    url(r'^profile/?P(<pk>[0-9]+)/$', ProfileView.as_view(), 
+    name='profile'),
 )
 
