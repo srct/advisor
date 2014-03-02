@@ -33,7 +33,7 @@ New | MySchool Advisor
 	    <!-- autocompletion would be awesome -->
         </div>
             <select multiple class="form-control">
-                {% for major in starttrajectoryform.fields.majors.choices %}
+                {% for major in starttrajectoryform.majors.field.choices %}
                 <option value="{{major.id}}">{{major}}</option>
                 {% endfor %}
                 </select>
@@ -54,7 +54,7 @@ New | MySchool Advisor
 	    <!-- autocompletion would be awesome -->
         </div>
                  <select multiple class="form-control">
-                {% for minor in starttrajectoryform.fields.minors.choices %}
+                {% for minor in starttrajectoryform.minors.fieldchoices %}
                 <option value="{{minor.id}}">{{minor}}</option>
                 {% endfor %}
 
