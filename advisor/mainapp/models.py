@@ -85,9 +85,10 @@ class MetaCourse(TimeStampedModel):
     slug = AutoSlugField(populate_from='title')
     catalogyear = models.IntegerField("Catalog Year")
     description = models.TextField(blank=True)
+    name = title
 
     def __unicode__(self):
-        return '%s' % self.title
+        return '%s' % self.name
 
 
 class Course(MetaCourse):
@@ -100,9 +101,7 @@ class Course(MetaCourse):
     corequisites = models.ManyToManyField(MetaCourse,
         blank=True, related_name='coreq+')
     credits = models.IntegerField()
-
-    def __unicode__(self):
-        return '%s %s' % (self.dept, self.courseid)
+    name = '%s %s' % (dept, courseid)
 
 
 class CourseGroup(MetaCourse):
