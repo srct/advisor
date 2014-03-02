@@ -51,15 +51,6 @@ class SemesterViewSet(viewsets.ModelViewSet):
     queryset = Semester.objects.all()
     serializer_class = SemesterSerializer
 #FORM CBV's
-class StartTrajectoryForm(FormView):
-    form_class = StartTrajectoryForm
-
-    def form_valid(self,form):
-        return super(StartTrajectoryForm, self).form_valid(form)
-
-    def clean(self,form):
-        return self.cleaned_data
-
 
 #Trajectory CBVS
 class CreateTrajectory(CreateView):
