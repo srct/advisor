@@ -5,9 +5,10 @@ UpdateView, FormView)
 from rest_framework import viewsets
 
 from mainapp.serializers import (ProgramSerializer, CourseSerializer,
-CourseGroupSerializer, TrajectorySerializer, SemesterSerializer)
+CourseGroupSerializer, TrajectorySerializer, SemesterSerializer,
+BuildResponseSerializer)
 from mainapp.models import (Trajectory, Program, Major, Minor, GenEd,
-Concentration, MetaCourse, Course, CourseGroup, Semester)
+Concentration, MetaCourse, Course, CourseGroup, Semester, BuildResponse)
 from mainapp.forms import StartTrajectoryForm
 # Create your views here.
 #FBV's
@@ -52,6 +53,9 @@ class TrajectoryViewSet(viewsets.ModelViewSet):
 class SemesterViewSet(viewsets.ModelViewSet):
     queryset = Semester.objects.all()
     serializer_class = SemesterSerializer
+class BuildResponseViewSet(viewsets.ModelViewSet):
+    queryset = BuildResponse.objects.all()
+    serializer_class = BuildResponseSerializer
 #FORM CBV's
 
 #Trajectory CBVS
