@@ -5,11 +5,10 @@ from django.contrib.auth.models import User
 
 class Student(TimeStampedModel):
     user = models.OneToOneField(User)
-    major = models.ForeignKey('Major')
-    tj = models.OneToOneField('Trajectory')
+    programs = models.ManyToManyField('Program')
+    trajectory = models.OneToOneField('Trajectory', blank=True)
     dateOfGrad = models.DateField()
-    advisorname = models.OneToOneField('AdvisorAdminUser')
-    coursestaken = models.ManyToManyField('Course')
+    advisorname = models.OneToOneField('AdvisorAdminUser', blank=True)
 
     def __unicode__(self):
         return '%s' % self.user
@@ -25,21 +24,27 @@ class AdvisorAdminUser(TimeStampedModel):
 class Semester(models.Model):
     number = models.IntegerField()
     user = models.ForeignKey(Student)
-    courses = models.ManyToManyField('Course')
+    courses = models.ManyToManyField('Course', blank=True)
     programs = models.ManyToManyField('Program')
+    nextsemester = models.ForeignKey('self', blank=True, null=True)
+    requirementssatisfied = models.ManyToManyField('Requirement',
+        related_name="reqssatisfied+", blank=True)
+
+    def __unicode__(self):
+        return '%s' % self.number
 
 
 class Trajectory(TimeStampedModel):
-    user = models.OneToOneField(User, related_name="tj")
+    user = models.OneToOneField(User, related_name="trajectory")
     semesters = models.ManyToManyField(Semester)
-    completed = models.ManyToManyField('Course')
 
 
 class Program(TimeStampedModel):
     name = models.CharField(max_length=50)
     slug = AutoSlugField(populate_from='name')
     description = models.TextField(blank=True)
-    courses = models.ManyToManyField('MetaCourse')
+    requirements = models.ManyToManyField('Requirement',
+        related_name="reqs+")
 
     def __unicode__(self):
         return '%s' % self.name
@@ -62,18 +67,25 @@ class Concentration(Program):
     pass
 
 
-class MetaCourse(TimeStampedModel):
+class Requirement(TimeStampedModel):
     name = models.CharField(max_length=50)
-    slug = AutoSlugField(populate_from='name')
+    courses = models.ManyToManyField('MetaCourse')
+
+
+class MetaCourse(TimeStampedModel):
+    title = models.CharField(max_length=50)
+    slug = AutoSlugField(populate_from='title')
     catalogyear = models.IntegerField()
     description = models.TextField(blank=True)
 
     def __unicode__(self):
-        return '%s' % self.name
+        return '%s' % self.title
 
 
 class Course(MetaCourse):
-    dept = models.CharField(max_length=50)
+    uniqname = models.CharField(max_length=20,
+        unique=True)
+    dept = models.CharField(max_length=10)
     courseid = models.IntegerField()
     prerequisites = models.ManyToManyField(MetaCourse,
         blank=True, related_name='prereq+')
