@@ -44,6 +44,7 @@ def assignedWeights(weightedCourse, programCourses):
     return weights
 
 def courseWeighting(programCourses):
+    """ a helper function for properly recursing """
 
     weights = {}
 
@@ -88,14 +89,14 @@ def requirementsFulfilled(taken, program):
 #        in the trajectory """
 #    return True
 
-def remainingReqCourses(taken, program):
+def remainingReqCourses(taken, programCourses):
     """ returns the remaining required courses for a program given
     the already taken courses """
 
     taken = set(taken)
-    courses = set(programCourses(program))
+    programCourses = set(programCourses)
 
-    remainingReqCourses = taken.intersection(courses)
+    remainingReqCourses = taken.intersection(programCourses)
 
     return remainingReqCourses
 
@@ -149,28 +150,33 @@ def enoughCredits(previousCourses, numRequired):
 
     return enoughcredits
 
-def generatedTrajectory():
+def generatedTrajectory(taken, program):
     
     generatedTrajectory = []
 
     # get the course's programs
-    programCourses()
+    programCourses = programCourses( program )
 
     # find the weights of all of the programs
-    courseWeighting()
+    courseWeighting( programCourses )
 
     # get the courses you have to take next
-    remainingReqCourses()
-    requirementsFulfilled()
-    nextCourses()
+    remainingReqCourses( taken, programCourses )
+    requirementsFulfilled( taken, program )
+    nextCourses( remainingReqCourses, taken )
 
     # of those, pick five of the heaviest
     ### IMPLEMENT THIS
-    
+
+    # associate courseWeights with nextCourses
+    # add a list of courses with the five highest weights from nextCourses to
+    # generated Trajectory
+    # add these new courses to taken
 
     # retrieve the next courses you need to take, and so forth
     remainingReqCourses()
     requirementsFulfilled()
+    nextCourses()
 
     # if there are no remainingReqCourses or requirementsFulfilled is True
 
