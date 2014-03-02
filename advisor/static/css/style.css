@@ -21,7 +21,7 @@ body {
   height: 16px;
 }
 #main {
-  padding-top: 45px;
+  margin-top: 65px;
 }
 
 .courses li {
@@ -31,6 +31,7 @@ body {
 
 .program {
   text-align: center;
+  padding-bottom: 15px;
 }
 
 .course {
