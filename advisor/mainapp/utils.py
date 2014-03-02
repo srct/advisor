@@ -198,7 +198,6 @@ def genTrajectories(taken, programs, user):
     if not taken:
         taken = ['']
     taken = set(taken)
-    print taken
     sem = Semester(number=0, user=user)
     sem.save()
     for takencourse in taken:
