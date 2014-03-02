@@ -179,11 +179,10 @@ def enoughCredits(previousCourses, numRequired):
 
 
 def genTrajectories(taken, programs, user):
-    tj = Trajectory(user=user, semesters=[])
     taken = set(taken)
     sem = Semester(number=0, user=user, courses=taken,
         programs=programs)
-    tj.semesters.append(sem)
+    tj = Trajectory(user=user, semesters=[sem])
     programCourses = []
     for program in programs:
         programcourses+=programCourses(program)
@@ -197,7 +196,7 @@ def genTrajectories(taken, programs, user):
             taken.add(doneclass)
         newsem = Semester(number=sem.number+1, user=user, courses=semclasses,
             programs=programs)
-        tj.semesters.append(sem)
+        tj.semesters.append(newsem)
         sem = newsem
         
         failed=False
