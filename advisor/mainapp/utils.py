@@ -5,8 +5,7 @@ from mainapp.models import Course, Semester, Trajectory # import more
 def programCourses(program):
 
     courses = []
-    requirements = program.requirements
-    print requirements[0]
+    requirements = program.requirements.all()
     print requirements
     for requirement in requirements:
         print requirement
