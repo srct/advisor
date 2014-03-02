@@ -39,7 +39,7 @@ INSTALLED_APPS = (
     'mainapp',
     'rest_framework',
     'south',
-    'rest_framework_swagger',
+    'django_gravatar',
 )
 
 MIDDLEWARE_CLASSES = (
