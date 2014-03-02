@@ -6,7 +6,7 @@
 
 {% block templates %}
 <script type="text/template" id="course-template">
-    <%= dept %> <%= courseid %>
+  <%= dept %> <%= courseid %>
 </script>
 <script type="text/template" id="program-template">
   <div class="panel-heading program-title">
@@ -30,11 +30,14 @@
 
 {% block content %}
 <div class="row semester-controls">
-  <div class="col-lg-2 col-lg-offset-8">
+  <div class="col-lg-2 col-lg-offset-7">
     <a href="#NewSemester" class="btn btn-block btn-lg btn-info">Semester <i class="fa fa-plus"></i> </a>
   </div>
   <div class="col-lg-2">
-    <a href="#Save" class="btn btn-block btn-lg btn-primary">Save</a>
+    <a id="save" href="#Save" class="btn btn-block btn-lg btn-primary">Save</a>
+  </div>
+  <div class="col-lg-1">
+    <a id="slide" href="#" class="btn btn-block btn-lg btn-inverse"><i class="fa fa-sort-desc fa-lg"></i></a>
   </div>
 </div>
 <div class="row gridster">
@@ -99,6 +102,23 @@
   </div>
   </div>
 </div>
+<div id="infoModal" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 id="course-info-title" class="modal-title"></h4>
+      </div>
+      <div id="course-info-body" class="modal-body">
+        <p id="course-info-description"></p>
+        <strong>Prerequsities:</strong><p id="course-info-prereqs"></p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 {% endblock %}
 {% block javascript %}
   {{ block.super }}

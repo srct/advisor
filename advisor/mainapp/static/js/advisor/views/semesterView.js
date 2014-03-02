@@ -8,7 +8,6 @@ advisor.SemesterView = Backbone.View.extend({
   },
 
   events: {
-    "click .panel-heading": "render"
   },
 
   render: function() {
@@ -21,10 +20,8 @@ advisor.SemesterView = Backbone.View.extend({
   render_courses: function() {
     //this.$('.panel-body').html('');
     var that = this;
-    console.log(that.model.get('courses'))
     this.model.fetchRelated('courses', {
       success: function() {
-        console.log(that.model.get('courses'));
         var courseViews = new advisor.CourseCollectionView({el: that.el});
         courseViews.addAll(that.model.get('courses'));
       },

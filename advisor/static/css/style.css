@@ -51,6 +51,7 @@ body {
   color: #171C21;
   display: inline-block;
   background-color: #2980B9;
+  cursor: pointer;
 }
 
 .CS {

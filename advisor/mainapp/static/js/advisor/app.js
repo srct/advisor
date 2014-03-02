@@ -13,10 +13,16 @@ $(function () {
       t.fetchRelated('semesters', {
         success: function() {
           advisor.Semesters = t.get('semesters');
-          new advisor.SemesterCollectionView();
+          advisor.SemestersViews = new advisor.SemesterCollectionView();
         }
       });
     }
   });
-
 });
+
+$(document).ready(function() {
+  $('#slide').click(function() {
+    $('#semesters').slideToggle();
+    //advisor.SemestersViews.addAll();
+  })
+})

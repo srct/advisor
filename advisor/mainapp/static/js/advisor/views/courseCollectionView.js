@@ -8,7 +8,6 @@ advisor.CourseCollectionView = Backbone.View.extend({
     var view = new advisor.CourseView({ model: course });
     // Fix bug where element render multiple times
     var elm = view.render().el
-    console.log(elm)
     $('#' + elm.id).remove()
     this.$el.append(elm);
   },

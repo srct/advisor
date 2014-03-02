@@ -2,7 +2,7 @@ var advisor = advisor || {};
 
 advisor.SemesterCollectionView = Backbone.View.extend({
 
-  className: 'semester',
+  el: '#semesters',
 
   initialize: function() {
     this.addAll();
@@ -15,7 +15,7 @@ advisor.SemesterCollectionView = Backbone.View.extend({
   },
 
   addAll: function() {
-    this.$el.html('');
+    //this.$el.html('');
     advisor.Semesters.each(this.addOne, this);
   },
 

@@ -8,7 +8,6 @@ advisor.Semester = Backbone.RelationalModel.extend({
   },
   
   events: {
-    "click .panel-heading": "toggle"
   },
 
   relations: [{
