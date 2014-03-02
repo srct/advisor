@@ -15,7 +15,6 @@
 	{% if user.is_authenticated %}
 	    <li><a href="{% url 'django.contrib.auth.views.logout' %}">Logout</a></li>
 	{% else %}
-    
         <li><a href="{% url 'django.contrib.auth.views.login' %}">Log In</a></li>
         {% endif %}
       </ul>
