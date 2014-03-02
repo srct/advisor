@@ -39,10 +39,10 @@ def assignedWeights(weightedCourse, programCourses):
                     weightedCourseCounter += 1
                     childReqList.append(course)
                     assignedWeights(course, childReqList)
-                
-        assignedWeights[weighedCourse] = coursecounter
-        
-    return assignWeights
+
+        assignedWeights[weightedCourse] = weightedCourseCounter
+
+    return assignedWeights
 
 def customAssignedWeights(assignedWeights, selectedCourses):
     """ remove courses that a student has not selected from the weighted
@@ -69,8 +69,8 @@ def requirementsFulfilled(alreadyTaken, program):
     for requirement in requirements:
         for coursegroup in requirement.coursegroup:
             courseRequirements = set(coursegroup.courses)
-            requirementCoursesTaken = intersection(courseRequirements, alreadyTaken)
-        
+            requirementCoursesTaken = courseRequirements.intersection(alreadyTaken)
+
             if len(requirementCoursesTaken) is requirement.coursegroup.numneeded:
                 requirementsFulfilled.append(requirement)
 
@@ -86,9 +86,9 @@ def remainingReqCourses(alreadyTaken, program):
     the already taken courses """
 
     alreadyTaken = set(alreadyTaken)
-    programCourses = set( programCourses(program) )
+    programCourses = set(programCourses(program))
 
-    remainingReqCourses = intersection(alreadyTaken, programCourses)
+    remainingReqCourses = alreadyTaken.intersection(programCourses)
 
     return remainingReqCourses
 
@@ -120,11 +120,11 @@ def findDependencies(deletedCourse, semester):
     for suspectCourse in semester.nextSemester.courses:
         reqs = set()
         for prereq in suspectCourse.preq:
-            if req is deletedCourse:
-                req.append(foundDependencies)
+            if prereq is deletedCourse:
+                reqs.append(foundDependencies)
         for coreq in suspectCourse.coreq:
-            if req is deletedCourse:
-                req.append(foundDependencies)
+            if coreq is deletedCourse:
+                reqs.append(foundDependencies)
 
     findDependencies(deletedCourse, semester.nextSemester)
 
