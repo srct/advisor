@@ -22,8 +22,7 @@ def build_trajectory(request):
     #process
     if request.method == "POST":
         form = StartTrajectoryForm(request.POST)
-        majors = form.fields['majors'].values()
-        print majors
+        print majors.cleaned_data
         #majors = form.fie
     return render_to_response('build.html', {
     })
