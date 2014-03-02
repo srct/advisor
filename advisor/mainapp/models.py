@@ -79,6 +79,7 @@ class Concentration(Program):
 class Requirement(TimeStampedModel):
     name = models.CharField(max_length=50)
     courses = models.ManyToManyField('MetaCourse')
+    catalogyear = models.IntegerField("Catalog Year")
 
     def __unicode__(self):
         return '%s' % self.name
