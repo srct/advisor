@@ -29,11 +29,14 @@ def build_trajectory(request):
         minor = form['minors'].value()
         to_search_major = Major.objects.get(pk=major[0])
         to_search_minor = Minor.objects.get(pk=minor[0])
+        cs101 = Course.objects.get(pk=737)
+        taken = []
+        taken.append(cs101)
         programs = []
         programs.append(to_search_major)
         programs.append(to_search_minor)
         user_in = Student.objects.get(user__username=request.user.username)
-        trac = genTrajectories(taken=None,programs=programs,user=user_in)
+        trac = genTrajectories(taken=taken,programs=programs,user=user_in)
         #majors = form.fie
     return render_to_response('build.html', {
     })
