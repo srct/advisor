@@ -134,7 +134,7 @@ def nextCourses(remainingReqCourses, taken):
         try:
             c = Course.objects.get(title=course)
         except:
-           pass 
+            c = CourseGroups.objects.get(title=course) 
         for prereq in c.prerequisites.all():
             reqs.add(prereq)
         #for coreq in course.coreq:
