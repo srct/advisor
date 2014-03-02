@@ -3,6 +3,7 @@ from django.views.generic import (CreateView, ListView, DetailView, DeleteView,
 UpdateView, FormView)
 
 from rest_framework import viewsets
+from braces.views import LoginRequiredMixin
 
 from mainapp.serializers import (ProgramSerializer, CourseSerializer,
 CourseGroupSerializer, TrajectorySerializer, SemesterSerializer,
@@ -148,7 +149,7 @@ class CoursesTaken(UpdateView):
     template_name = 'student_form.html'
     form_class = StudentForm
 
-class ProfileView(DetailView):
+class ProfileView(LoginRequiredMixin, DetailView):
     model = Student
     template_name = 'profile.html'
 
