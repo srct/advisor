@@ -43,6 +43,7 @@ def build_trajectory(request):
         })
     else:
         reutrn render_to_response('build.html', {
+        ,
         })
 class StartTrajectoryView(FormView):
     template_name = 'new.html'
