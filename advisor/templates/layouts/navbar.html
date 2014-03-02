@@ -11,12 +11,13 @@
         <li><a href="#">Compare</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Search</a></li>
 	{% if user.is_authenticated %}
 	    <li><a href="{% url 'django.contrib.auth.views.logout' %}">Logout</a></li>
 	{% else %}
     
         <li><a href="{% url 'django.contrib.auth.views.login' %}">Log In</a></li>
-    {% endif %}
+        {% endif %}
       </ul>
     </div><!--/.nav-collapse -->
   </div>
