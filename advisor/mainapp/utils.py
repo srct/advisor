@@ -113,23 +113,22 @@ def nextCourses(remainingReqCourses, alreadyTaken):
 #    """ the maximum credits allowed for a semester-- returns different values
 #        to warn or disallow if maximum credits are touched or exceeded """
 
-def findDependancies(deletedCourse, semester):
+def findDependencies(deletedCourse, semester):
     """ if a student removes a course while editing, find all courses
         that have require the removed courses """
-    foundDependancies = []
+    foundDependencies = []
     for suspectCourse in semester.nextSemester.courses:
         reqs = set()
         for prereq in suspectCourse.preq:
-            reqs.add(prereq)
+            if req is deletedCourse:
+                req.append(foundDependencies)
         for coreq in suspectCourse.coreq:
-            reqs.add(coreq)
-            for req in reqs:
-                if req is deletedCourse:
-                    req.append(foundDependancies)
+            if req is deletedCourse:
+                req.append(foundDependencies)
 
-    findDependancies(deletedCourse, semester.nextSemester)
+    findDependencies(deletedCourse, semester.nextSemester)
 
-    return foundDependancies
+    return foundDependencies
 
 def enoughCredits(previousCourses, numRequired):
     """ checks if enough credits have been taken to graduate """
