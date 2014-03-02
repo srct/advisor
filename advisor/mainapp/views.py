@@ -29,6 +29,7 @@ def build_trajectory(request):
         minor = form['minors'].value()
         to_search_major = Major.objects.get(pk=major[0])
         to_search_minor = Minor.objects.get(pk=minor[0])
+        programs = []
         programs.append(to_search_major)
         programs.append(to_search_minor)
         user_in = User.object.get(user=request.user)
