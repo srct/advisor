@@ -6,10 +6,8 @@ def programCourses(program):
 
     courses = []
     requirements = program.requirements.all()
-    print requirements
     for requirement in requirements:
-        print requirement
-        for coursegroup in requirement.coursegroup.all():
+        for coursegroup in requirement.courses.all():
             for course in coursegroup.courses.all():
                 courses.append(course)
 
