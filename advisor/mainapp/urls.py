@@ -1,8 +1,7 @@
 from django.conf.urls import patterns, include, url
 from mainapp.views import (ProgramViewSet, CourseViewSet, CourseGroupViewSet,
-    TrajectoryViewSet, build_trajectory)
-#from .views import *
-from mainapp.models import Program, Course, CourseGroup, Trajectory
+    TrajectoryViewSet, build_trajectory, SemesterViewSet)
+from mainapp.models import Program, Course, CourseGroup, Trajectory, Semester
 
 from rest_framework.routers import DefaultRouter
 
@@ -11,6 +10,7 @@ router.register(r'programs', ProgramViewSet)
 router.register(r'courses', CourseViewSet)
 router.register(r'coursegroups', CourseGroupViewSet)
 router.register(r'trajectories', TrajectoryViewSet)
+router.register(r'semesters', SemesterViewSet)
 
 urlpatterns = patterns('',
     # Examples:

@@ -3,8 +3,10 @@ from django.views.generic import CreateView, ListView, DetailView, DeleteView, U
 
 from rest_framework import viewsets
 
-from mainapp.serializers import ProgramSerializer, CourseSerializer, CourseGroupSerializer, TrajectorySerializer
-from mainapp.models import Trajectory, Program, Major, Minor, GenEd, Concentration, MetaCourse, Course, CourseGroup
+from mainapp.serializers import (ProgramSerializer, CourseSerializer,
+CourseGroupSerializer, TrajectorySerializer, SemesterSerializer)
+from mainapp.models import (Trajectory, Program, Major, Minor, GenEd,
+Concentration, MetaCourse, Course, CourseGroup, Semester)
 # Create your views here.
 #API SHIT
 
@@ -24,6 +26,9 @@ class TrajectoryViewSet(viewsets.ModelViewSet):
     queryset = Trajectory.objects.all()
     serializer_class = TrajectorySerializer
 
+class SemesterViewSet(viewsets.ModelViewSet):
+    queryset = Semester.objects.all()
+    serializer_class = SemesterSerializer
 # Generic Views
 def build_trajectory(request):
     return render(request, 'build.html')
