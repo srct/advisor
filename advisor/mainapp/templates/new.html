@@ -53,9 +53,12 @@ New | MySchool Advisor
 	    {% endfor %}
 	    <!-- autocompletion would be awesome -->
         </div>
-         <div class="col-sm-offset-1 col-sm-1">
-          <button type="button" class="btn btn-primary">+</button>
-        </div>
+                 <select multiple class="form-control">
+                {% for minor in minors %}
+                <option value="{{minor.id}}">{{minor}}</option>
+            </select>
+                {% endfor %}
+
       </div>
 
       <!-- Javascript for adding an additional field -->
