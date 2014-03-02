@@ -10,6 +10,19 @@ def programCourses(program):
         for course in requirement.courses.all():
             courses.append(course)
 
+    repeat = True
+    while repeat:
+        repeat = False
+        for course in courses:
+            try:
+                course = Course.objects.get(title=course.title)
+            except:
+                coursegroup = CourseGroup.objects.get(title=course.title)
+                repeat = True
+                courses.remove(course)
+                for newcourse in coursegroup.courses:
+                    courses.append(newcourse)
+
     return courses
 
 def genDepTree(course):
