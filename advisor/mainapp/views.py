@@ -23,20 +23,9 @@ def build_trajectory(request):
     semester_key = 1
     return HttpResponse(semester_key)
 @login_required
-def searchMajorMinor(request):
-    #query
-    if request.method == 'POST':
-        form = StartTrajectoryForm(request.POST)
-        if form.is_valid():
-            #Queryset
-            major = Major.objects.filter(name=form['major'])
-            minor = Minor.objects.filter(name=form['minor'])
-            #Check to seee if empty
-            if major is None:
-                msg = "Something Went Wrong"
-            else:
-                msg = "Found Object"
-            return build_trajectory(request)
+class StartTrajectoryView(FormView):
+    template_name = 'new.html'
+    form_class = StartTrajectoryForm
 
 #API SHIT
 @login_required
