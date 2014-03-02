@@ -149,5 +149,5 @@ class ProfileView(DetailView):
     template_name = 'profile.html'
 
     def get_queryset(self):
-        qs = super(ProfileView,self).get_query_set()
+        qs = super(ProfileView,self).get_queryset()
         return qs.filter(student__user=self.request.user)
