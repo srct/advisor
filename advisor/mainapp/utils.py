@@ -20,6 +20,7 @@ def requirementFulfilled():
 
 def remainingReqCourses():
     """ returns the remaining required courses given previous courses taken """
+
     return True
 
 def previousCourses():
@@ -63,9 +64,17 @@ def findDependancies(deletedCourse, semester):
 
     return foundDependancies
 
-def enoughCredits():
+def enoughCredits(previousCourses, numRequired):
     """ checks if enough credits have been taken to graduate """
-    return True
+    enoughCredits = False
+    numTaken = 0
+    for course in previousCourses:
+        numTaken += course.credits
+    
+    if numTaken >= numRequired:
+        enoughCredits = True
+
+    return enoughCredits
 
 ### student page
 
