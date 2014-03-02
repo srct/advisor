@@ -98,8 +98,10 @@ def nextCourses(remainingReqCourses, alreadyTaken):
     nextCourses = []
     for course in remainingReqCourses:
         reqs = set()
-        course.prereq.append(reqs)
-        course.coreq.append(reqs)
+        for prereq in course.preq:
+            reqs.add(prereq)
+        for coreq in course.coreq:
+            reqs.add(coreq)
         for req in reqs:
             if req in previousCourses:
                 nextCourses.append(course)
@@ -117,8 +119,10 @@ def findDependancies(deletedCourse, semester):
     foundDependancies = []
     for suspectCourse in semester.nextSemester.courses:
         reqs = set()
-        suspectCourse.prereq.append(reqs)
-        suspectCourse.coreq.append(reqs)
+        for prereq in suspectCourse.preq:
+            reqs.add(prereq)
+        for coreq in suspectCourse.coreq:
+            reqs.add(coreq)
             for req in reqs:
                 if req is deletedCourse:
                     req.append(foundDependancies)
