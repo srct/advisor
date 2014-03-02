@@ -6,12 +6,15 @@ from django.contrib.auth.models import User
 
 class Student(TimeStampedModel):
     user = models.OneToOneField(User)
+    slug = AutoSlugField(populate_from='user', null=True)
     programs = models.ManyToManyField('Program')
-    trajectory = models.OneToOneField('Trajectory', blank=True)
+    trajectory = models.OneToOneField('Trajectory', blank=True,
+    null=True)
     coursestaken = models.ManyToManyField('Course', blank=True,
-        verbose_name="Courses Taken")
+        null=True, verbose_name="Courses Taken")
     dateOfGrad = models.DateField("Graduation Date")
-    advisorname = models.OneToOneField('AdvisorAdminUser', blank=True)
+    advisorname = models.OneToOneField('AdvisorAdminUser', blank=True,
+    null=True)
 
     def __unicode__(self):
         return '%s' % self.user
@@ -82,17 +85,12 @@ class Requirement(TimeStampedModel):
 
 class MetaCourse(TimeStampedModel):
     title = models.CharField(max_length=50)
-    name = models.CharField(max_length=50)
     slug = AutoSlugField(populate_from='title')
     catalogyear = models.IntegerField("Catalog Year")
     description = models.TextField(blank=True)
-    name = models.CharField(max_length=50, null=True, blank=True)
 
     def __unicode__(self):
-        if self.name:
-            return '%s' % self.name
-        else:
-            return '%s' % self.title
+        return '%s' % self.title
 
 
 class Course(MetaCourse):
@@ -105,10 +103,6 @@ class Course(MetaCourse):
     corequisites = models.ManyToManyField(MetaCourse,
         blank=True, related_name='coreq+')
     credits = models.IntegerField()
-
-    def save(self):
-        self.name = '%s %s' % (dept, courseid)
-        super(Course, self).save()
 
 
 class CourseGroup(MetaCourse):

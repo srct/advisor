@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 from mainapp.views import (ProgramViewSet, CourseViewSet, CourseGroupViewSet,
 TrajectoryViewSet, build_trajectory, SemesterViewSet, BuildResponseViewSet,
-DetailStudent)
+DetailStudent, ProfileView)
 from mainapp.models import (Program, Course, CourseGroup, Trajectory, Semester,
 BuildResponse, Student)
 
@@ -21,7 +21,9 @@ urlpatterns = patterns('',
     # url(r'^blog/', include('blog.urls')),
     url(r'^', include(router.urls)),
     url(r'^build/', build_trajectory, name='build'),
-    url(r'^student/?(<pk>[0-9]+)/$', DetailStudent.as_view(),
+    url(r'^student/(?P<slug>[^/]+)/$', DetailStudent.as_view(),
     name='detail-student'),
+    url(r'^profile/(?P<slug>[^/]+)/$', ProfileView.as_view(), 
+    name='profile'),
 )
 

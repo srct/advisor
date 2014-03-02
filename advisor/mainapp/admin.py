@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.auth.models import Group
 from mainapp.models import *
 # Register your Models here.
 
@@ -43,3 +44,4 @@ admin.site.register(Minor, MinorAdmin)
 admin.site.register(GenEd, GenEdAdmin)
 admin.site.register(Concentration, ConcentrationAdmin)
 admin.site.register(Requirement, RequirementAdmin)
+admin.site.unregister(Group)
