@@ -41,7 +41,7 @@ New | MySchool Advisor
       <!-- Ensure no more than two majors -->
 
       <legend>Select your minor(s).</legend>
-      <div method="post" action="{% url 'build_trajectory' %}" class="form-group{% if starttrajectoryform.name.errors %} has-error {% endif %}">
+      <div method="post" action="{% url 'views.build_trajectory' %}" class="form-group{% if starttrajectoryform.name.errors %} has-error {% endif %}">
         <label for "{{ starttrajectoryform.name.id_for_label }}" class="col-sm-2">
 	{{ starttrajectoryform.name.id_for_label }}</label>
         <div class="col-sm-8">
