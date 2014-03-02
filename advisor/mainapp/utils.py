@@ -1,10 +1,6 @@
 from mainapp.models import Course # import more
 
-### creating a trajectory
-
-#def maxProgramsAllowed():
-#    """ the maximum programs allowed, e.g. 2 majors and 3 minors tops """
-#   return True
+### common functionality
 
 def programCourses(program):
 
@@ -17,24 +13,36 @@ def programCourses(program):
 
     return programCourses
 
+### creating a trajectory
+
+#def maxProgramsAllowed():
+#    """ the maximum programs allowed, e.g. 2 majors and 3 minors tops """
+#   return True
+
 ### automatically building a trajectory
 
-def assignWeights(program):
+def assignWeights(weightedCourse, programCourses):
 
     assignWeights = {}
 
-    for weighedCourse in programCourses:
-        courseCounter = 0
+    for weightedCourse in programCourses:
+        weightedCourseCounter = 0
         reqs = set()
-        course.prereq.append(reqs)
-        course.coreq.append(reqs)
+        for prereq in weightedCourse.preq:
+            reqs.add(prereq)
+        for coreq in weightedCourse.coreq:
+            reqs.add(coreq)
         for req in reqs:
             for course in programCourses:
+                childReqList = []
                 if req is course:
-                    courseCounter += 1
+                    weightedCourseCounter += 1
+                    childReqList.append(course)
+                    assignWeights(course, childReqList)
+                
         assignWeights[weighedCourse] = coursecounter
-    
-    return True
+        
+    return assignWeights
 
 ### editing a trajectory
 
