@@ -4,10 +4,10 @@ advisor.Program = Backbone.RelationalModel.extend({
   relations: [{
     type: Backbone.HasMany,
     key: 'requirements',
-    relatedModel: 'advisor.Requirements',
+    relatedModel: 'advisor.Requirement',
     collectionType: 'RequirementCollection',
     reverseRelation: {
-      key: 'satisfies',
+      key: 'program',
       includeInJSON: 'id'
     }
   }]
