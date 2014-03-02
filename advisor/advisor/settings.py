@@ -103,6 +103,9 @@ REST_FRAMEWORK = {
     # Only used if the `serializer_class` attribute is not set on a view.
     'DEFAULT_MODEL_SERIALIZER_CLASS':
         'rest_framework.serializers.HyperlinkedModelSerializer',
+    'PAGINATE_BY': 50,
+    'PAGINATE_BY_PARAM': 'page_size',
+    'MAX_PAGINATE_BY': 100
 
 }
 SWAGGER_SETTINGS = {
