@@ -22,7 +22,9 @@ def build_trajectory(request):
     #process
     if request.method == "POST":
         form = StartTrajectoryForm(request.POST)
-        print form['majors'].value() 
+        #only lets you do one
+        major = form['majors'].value() 
+        minor = form['minors'].value()
         #majors = form.fie
     return render_to_response('build.html', {
     })
