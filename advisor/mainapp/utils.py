@@ -6,6 +6,7 @@ def programCourses(program):
 
     courses = []
     requirements = program.requirements
+    print requirements
     for requirement in requirements:
         print requirement
         for coursegroup in requirement.coursegroup:
