@@ -92,6 +92,9 @@ class Course(MetaCourse):
     corequisites = models.ManyToManyField(MetaCourse,
         blank=True, related_name='coreq+')
     credits = models.IntegerField()
+    
+    def __unicode__(self):
+        return '%s %s' % (self.dept, self.courseid)
 
 
 class CourseGroup(MetaCourse):
