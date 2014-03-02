@@ -28,22 +28,18 @@ Login | YourSchool Advisor
       </div>
       {% endif %}
 
-      <form>
+      <form action="/login/" method="post">{% csrf_token %}
         <fieldset>
 
           <legend>Log In</legend>
+    <fieldset id="inputs">
+        <input id="username" type="text" placeholder="Username" autofocus
+        required>
+        <input id="password" type="password" placeholder="Password" required>
+    </fieldset>
+    <fieldset id="actions">
+        <input type="submit" id="submit" value="Log in"/>
 
-          <div>
-	    Username
-	  </div>
-
-          <div>
-	    Password
-	  </div>
-
-          <div>
-            Sign In
-	  </div>
 
 	</fieldset>
       </form>

@@ -82,13 +82,17 @@ class Requirement(TimeStampedModel):
 
 class MetaCourse(TimeStampedModel):
     title = models.CharField(max_length=50)
+    name = models.CharField(max_length=50)
     slug = AutoSlugField(populate_from='title')
     catalogyear = models.IntegerField("Catalog Year")
     description = models.TextField(blank=True)
-    name = title
+    name = models.CharField(max_length=50, null=True, blank=True)
 
     def __unicode__(self):
-        return '%s' % self.name
+        if self.name:
+            return '%s' % self.name
+        else:
+            return '%s' % self.title
 
 
 class Course(MetaCourse):
@@ -101,7 +105,10 @@ class Course(MetaCourse):
     corequisites = models.ManyToManyField(MetaCourse,
         blank=True, related_name='coreq+')
     credits = models.IntegerField()
-    name = '%s %s' % (dept, courseid)
+
+    def save(self):
+        self.name = '%s %s' % (dept, courseid)
+        super(Course, self).save()
 
 
 class CourseGroup(MetaCourse):
