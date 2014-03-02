@@ -7,6 +7,7 @@ class Student(TimeStampedModel):
     user = models.OneToOneField(User)
     programs = models.ManyToManyField('Program')
     trajectory = models.OneToOneField('Trajectory', blank=True)
+    coursestaken = models.ManyToManyField('Course', blank=True)
     dateOfGrad = models.DateField()
     advisorname = models.OneToOneField('AdvisorAdminUser', blank=True)
 
