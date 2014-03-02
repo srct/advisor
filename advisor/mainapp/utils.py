@@ -4,14 +4,14 @@ from mainapp.models import Course # import more
 
 def programCourses(program):
 
-    programCourses = []
+    courses = []
     requirements = program.requirements
     for requirement in requirements:
         for coursegroup in requirement.coursegroup:
             for course in coursegroup.courses:
-                programCourses.append(course)
+                courses.append(course)
 
-    return programCourses
+    return courses
 
 ### creating a trajectory
 
@@ -23,7 +23,7 @@ def programCourses(program):
 
 def assignedWeights(weightedCourse, programCourses):
     """ assign weights to all courses in a program for automation """
-    assignedWeights = {}
+    weights = {}
 
     for weightedCourse in programCourses:
         weightedCourseCounter = 0
@@ -39,63 +39,63 @@ def assignedWeights(weightedCourse, programCourses):
                     weightedCourseCounter += 1
                     childReqList.append(course)
                     assignedWeights(course, childReqList)
-                
-        assignedWeights[weighedCourse] = coursecounter
-        
-    return assignWeights
 
-def customAssignedWeights(assignedWeights, selectedCourses):
+        weights[weightedCourse] = weightedCourseCounter
+
+    return weights
+
+def customAssignedWeights(weights, selectedCourses):
     """ remove courses that a student has not selected from the weighted
         courses """
-    customAssignedWeights = assignedWeights
+    customweights = weights
 
     for course in selectedCourses:
-        del customAssignedWeights[course]
+        del customweights[course]
 
-    return customAssignedWeights
+    return customweights
 
-def shortestPath(assignedWeights):
+def shortestPath(weights):
     return True
 
 ### editing a trajectory
 
-def requirementsFulfilled(alreadyTaken, program):
+def requirementsFulfilled(taken, program):
     """ for *A* program, return a list of all requirements fulfilled """
 
-    requirementsFulfilled = []
-    alreadyTaken = set(alreadyTaken)
+    fulfilled = []
+    taken = set(taken)
     requirements = program.requirements
 
     for requirement in requirements:
         for coursegroup in requirement.coursegroup:
             courseRequirements = set(coursegroup.courses)
-            requirementCoursesTaken = intersection(courseRequirements, alreadyTaken)
-        
-            if len(requirementCoursesTaken) is requirement.coursegroup.numneeded:
-                requirementsFulfilled.append(requirement)
+            requirementCoursesTaken = courseRequirements.intersection(alreadyTaken)
 
-    return requirementsFulfilled
+            if len(requirementCoursesTaken) is requirement.coursegroup.numneeded:
+                fulfilled.append(requirement)
+
+    return fulfilled
 
 #def alreadyTaken():
 #    """ return all of the courses that a student has already taken so far
 #        in the trajectory """
 #    return True
 
-def remainingReqCourses(alreadyTaken, program):
+def remainingReqCourses(taken, program):
     """ returns the remaining required courses for a program given
     the already taken courses """
 
-    alreadyTaken = set(alreadyTaken)
-    programCourses = set( programCourses(program) )
+    taken = set(taken)
+    courses = set(programCourses(program))
 
-    remainingReqCourses = intersection(alreadyTaken, programCourses)
+    remainingReqCourses = taken.intersection(courses)
 
     return remainingReqCourses
 
-def nextCourses(remainingReqCourses, alreadyTaken):
+def nextCourses(remainingReqCourses, taken):
     """ which courses you can take next based on prereqs and coreqs, given
         already taken courses and remaining required courses """
-    nextCourses = []
+    nextcourses = []
     for course in remainingReqCourses:
         reqs = set()
         for prereq in course.preq:
@@ -103,8 +103,8 @@ def nextCourses(remainingReqCourses, alreadyTaken):
         for coreq in course.coreq:
             reqs.add(coreq)
         for req in reqs:
-            if req in previousCourses:
-                nextCourses.append(course)
+            if req in taken:
+                nextcourses.append(course)
 
     return nextCourses
 
@@ -113,35 +113,34 @@ def nextCourses(remainingReqCourses, alreadyTaken):
 #    """ the maximum credits allowed for a semester-- returns different values
 #        to warn or disallow if maximum credits are touched or exceeded """
 
-def findDependancies(deletedCourse, semester):
+def findDependencies(deletedCourse, semester):
     """ if a student removes a course while editing, find all courses
         that have require the removed courses """
-    foundDependancies = []
+    foundDependencies = []
     for suspectCourse in semester.nextSemester.courses:
         reqs = set()
         for prereq in suspectCourse.preq:
-            reqs.add(prereq)
+            if prereq is deletedCourse:
+                reqs.append(foundDependencies)
         for coreq in suspectCourse.coreq:
-            reqs.add(coreq)
-            for req in reqs:
-                if req is deletedCourse:
-                    req.append(foundDependancies)
+            if coreq is deletedCourse:
+                reqs.append(foundDependencies)
 
-    findDependancies(deletedCourse, semester.nextSemester)
+    findDependencies(deletedCourse, semester.nextSemester)
 
-    return foundDependancies
+    return foundDependencies
 
 def enoughCredits(previousCourses, numRequired):
     """ checks if enough credits have been taken to graduate """
-    enoughCredits = False
+    enoughcredits = False
     numTaken = 0
     for course in previousCourses:
         numTaken += course.credits
     
     if numTaken >= numRequired:
-        enoughCredits = True
+        enoughcredits = True
 
-    return enoughCredits
+    return enoughcredits
 
 ### student page
 

@@ -69,11 +69,13 @@ class Minor(Program):
 
 
 class GenEd(Program):
-    pass
+    class Meta:
+        verbose_name = "General Education Requirements"
 
 
 class Concentration(Program):
-    associatedmajors = models.ForeignKey(Major, null=True)
+    associatedmajors = models.ForeignKey(Major, null=True,
+        verbose_name="Associated Major")
 
 
 class Requirement(TimeStampedModel):

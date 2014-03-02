@@ -23,9 +23,11 @@ urlpatterns = patterns('',
     url(r'^build/', build_trajectory, name='build'),
     url(r'^new/', StartTrajectoryView.as_view(), name='new-trac'),
     url(r'^compare/', compare, name='compare'),
+    url(r'^search/', search, name='search'),
     #url(r'^student/(?P<slug>[^/]+)/$', DetailStudent.as_view(),
     #name='detail-student'),
     url(r'^profile/', profile, name='profile-detail'), 
     #name='profile'),
+    url(r'^search/', include('haystack.urls')),
 )
 

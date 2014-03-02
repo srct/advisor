@@ -5,7 +5,7 @@ from mainapp.models import *
 
 
 class StudentAdmin(admin.ModelAdmin):
-    pass
+    filter_horizontal = ('programs', 'coursestaken',)
 
 
 class CourseAdmin(admin.ModelAdmin):

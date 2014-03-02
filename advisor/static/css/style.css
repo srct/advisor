@@ -15,7 +15,6 @@ body {
   margin: 0 auto -30px;
   /* Pad bottom by footer height */
   padding: 0 0 30px;
-  padding-top: 53px;
 }
 #icon{
   width: 16px;
