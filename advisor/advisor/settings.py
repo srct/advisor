@@ -43,6 +43,7 @@ INSTALLED_APPS = (
     'django_gravatar',
     'autocomplete_light',
     'haystack',
+    'floppyforms',
 )
 
 MIDDLEWARE_CLASSES = (
