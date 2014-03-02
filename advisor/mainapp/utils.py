@@ -179,6 +179,8 @@ def enoughCredits(previousCourses, numRequired):
 
 
 def genTrajectories(taken, programs, user):
+    if not taken:
+        taken = ['']
     taken = set(taken)
     sem = Semester(number=0, user=user, courses=taken,
         programs=programs)
