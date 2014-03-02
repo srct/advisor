@@ -4,7 +4,7 @@ from django.core.exceptions import ValidationError
 from mainapp.models import Student, Major, Minor, GenEd
 
 # form on new page
-class StartTrajectoryForm(forms.Form, majors, minors):
+class StartTrajectoryForm(forms.Form):
     majors = Major.objects.all()
     print majors
     minors = Minor.objects.all()
