@@ -17,10 +17,12 @@ from mainapp.forms import StartTrajectoryForm, StudentForm
 # Create your views here.
 #FBV's
 # Generic Views
+@login_required
 def build_trajectory(request):
     #process
     semester_key = 1
     return HttpResponse(semester_key)
+@login_required
 def searchMajorMinor(request):
     #query
     if request.method == 'POST':
@@ -45,8 +47,6 @@ def profile(request):
             "firstname" : current_user.user.first_name,
             "advisorname" : current_user.advisorname,
     })
-    
-
 class RequirementViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Requirement.objects.all()
     serializer_class = RequirementSerializer
