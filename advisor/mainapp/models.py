@@ -78,6 +78,9 @@ class Concentration(Program):
         verbose_name="Associated Major")
 
 
+class RequirementManager(models.Manager):
+    pass
+
 class Requirement(TimeStampedModel):
     name = models.CharField(max_length=50)
     courses = models.ManyToManyField('MetaCourse')
