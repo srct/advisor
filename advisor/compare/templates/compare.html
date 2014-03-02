@@ -1,0 +1,129 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}
+Compare | YourSchool Advisor
+{% endblock %}
+
+{% block content %}
+
+<div class="page-header" id="banner">
+  <div class="row">
+    <div class="col-md-12 text-center">
+      <h2>Compare Trajectories</h2>
+    </div>
+  </div>
+</div>
+
+<div class="row well">
+  <legend>Choose up to three</legend>
+  <div class="col-md-12">
+    <form class="form-vertical" action="" method="post" role="form">
+      <div class="form-group">
+        <label for "myTrajectories" class="col-md-2">My Trajectories</label>  
+          <div class="col-md-3">
+            <select class="form-control">
+              <option>My Trajectory 1</option>
+              <option>My Trajectory 2</option>
+              <option>My Trajectory 3</option>
+              <option>My Trajectory 4</option>
+            </select>
+          </div>
+          <div class="col-md-1">
+            <button type="button" class="btn btn-primary">+</button>
+          </div>
+      </div>
+
+      <div class="form-group">
+        <label for "myTrajectories" class="col-md-2">Public Trajectories</label>  
+          <div class="col-md-3">
+            <input type"text" class="form-control" id="Trajectory" placeholder="dbond2">
+          </div>
+          <div class="col-sm-1">
+            <button type="button" class="btn btn-primary">+</button>
+          </div>
+        </div>
+
+      <!-- spacing should be fixed -->
+      <br />
+      <br />
+
+      <div class="form-group">
+        <div class="col-md-offset-11 col-md-">
+          <button type="submit" class="btn btn-primary" value="Submit">Submit</button>
+        </div>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+<div class="row well">
+  <legend>Automatic comparisons of your selected trajectories.</legend>
+  <div class="col-md-12">
+    <p>Trajectory one will take longer to complete.</p>
+    <p>Trajectory two has fewer higher-level classes.</p>
+    <p>Trajectory one has the lightest average courseload.</p>
+  </div>
+
+  <div class="col-md-12">
+    <p>Common courses between trajectories include:</p>
+  </div>
+
+  <div class="col-md-6">
+    <p>Additional electives (courses not required for the completion of your
+    selected program) for trajectory one include:</p>
+  </div>
+
+  <div class="col-md-6">
+    <p>Additional electives (courses not required for the completion of your
+    selected program) for trajectory two include:</p>
+  </div>
+
+</div>
+
+<p>Have an if statement for columns if only three trajectories instead of two, etc</p>
+
+<div class="row">
+
+  <div class="col-md-4 well">
+    <h3>Trajectory One's Name</h3>
+    <h4><p>Name(s) of the programs</p></h4>
+      {% for trajectory in previousTrajectories %}
+        <div class="col-md-4">
+	  {% for course in trajectory %}
+
+	  {% endfor %}
+	</div>
+      {% endfor %}
+  </div>
+
+  <div class="col-md-4 well">
+    <h3>Trajectory Two's Name</h3>
+    <h4><p>Name(s) of the programs</p></h4>
+      {% for trajectory in previousTrajectories %}
+        <div class="col-md-4">
+	  {% for course in trajectory %}
+            <div class="col-md-4">
+	      Information about the class
+	    </div>
+	  {% endfor %}
+	  Information about the semester
+	</div>
+      {% endfor %}
+  </div>
+
+  <div class="col-md-4 well">
+    <h3>Trajectory Three's Name</h3>
+    <h4><p>Name(s) of the programs</p></h4>
+      {% for trajectory in previousTrajectories %}
+        <div class="col-md-4">
+	  {% for course in trajectory %}
+
+	  {% endfor %}
+	</div>
+      {% endfor %}
+  </div>
+
+</div>
+
+{% endblock %}
