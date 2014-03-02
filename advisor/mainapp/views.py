@@ -12,7 +12,7 @@ from mainapp.forms import StartTrajectoryForm
 # Create your views here.
 #FBV's
 # Generic Views
-def build_trajectory(request):
+def build_trajectory(request, majors, minors):
     return render(request, 'build.html')
 def searchMajorMinor(request):
     #query
@@ -27,7 +27,7 @@ def searchMajorMinor(request):
                 msg = "Something Went Wrong"
             else:
                 msg = "Found Object"
-            return HttpResponse(msg)
+            return build_trajectory(request, major, minor)
 
 #API SHIT
 
