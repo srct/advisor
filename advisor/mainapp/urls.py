@@ -20,7 +20,7 @@ urlpatterns = patterns('',
     # Examples:
     # url(r'^$', 'advisor.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
-    url(r'^$', TemplateView.as_view(template_name='index.html')),
+    url(r'^$', TemplateView.as_view(template_name='index.html'), name='index'),
     url(r'^api/', include(router.urls)),
     url(r'^build/', build_trajectory, name='build'),
     url(r'^student/(?P<slug>[^/]+)/$', DetailStudent.as_view(),
