@@ -58,7 +58,8 @@ def findDependancies(deletedCourse, semester):
             for req in reqs:
                 if req is deletedCourse:
                     req.append(foundDependancies)
-                    findDependancies(deletedCourse, semester.nextSemester)
+
+    findDependancies(deletedCourse, semester.nextSemester)
 
     return foundDependancies
 
