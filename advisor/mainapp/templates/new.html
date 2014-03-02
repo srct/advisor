@@ -19,7 +19,7 @@ New | MySchool Advisor
   <div class="col-md-offset-1 col-md-10 well">
     <form class="form-horizontal" action="{% url 'build-me' %}" method="post" role="form" enctype="multipart/form-data">
       {% csrf_token %}
-        {% form starttrajectoryform using "floppyforms/layouts/mulitple.html" %}
+        {{ form.as_p  }}
       <!-- Javascript for adding an additional field -->
       <!-- ensure no more than three minors -->
 
