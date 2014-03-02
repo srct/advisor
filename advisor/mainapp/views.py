@@ -14,6 +14,21 @@ from mainapp.forms import StartTrajectoryForm
 # Generic Views
 def build_trajectory(request):
     return render(request, 'build.html')
+def searchMajorMinor(request):
+    #query
+    if request.method == 'POST':
+        form = StartTrajectoryForm(request.POST)
+        if form.is_valid():
+            #Queryset
+            major = Major.objects.filter(name=form['major'])
+            minor = Minor.objects.filter(name=form['minor'])
+            #Check to seee if empty
+            if major is None:
+                msg = "Something Went Wrong"
+            else:
+                msg = "Found Object"
+            return HttpResponse(msg)
+
 #API SHIT
 
 class ProgramViewSet(viewsets.ReadOnlyModelViewSet):
