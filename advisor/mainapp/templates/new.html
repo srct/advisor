@@ -25,14 +25,14 @@ New | MySchool Advisor
       <div class="form-group{% if starttrajectoryform.name.errors %} has-error {% endif %}">
         <label for "{{ starttrajectoryform.name.id_for_label}}" class="col-sm-2">
 	{{ starttrajectoryform.name.id_for_label }}</label>
-        <div class="col-sm-11">
+        <div class="col-sm-8">
 	    {{ starttrajectoryform.name }}
 	    {% for error in starttrajectoryform.name.errors %}
 	        <span class="help-block">{{ error }}</span>
 	    {% endfor %}
 	    <!-- autocompletion would be awesome -->
         </div>
-         <div class="col-sm-1">
+         <div class="col-sm-offset-1 col-sm-1">
           <button type="button" class="btn btn-primary">+</button>
         </div>
       </div>
@@ -44,14 +44,14 @@ New | MySchool Advisor
       <div class="form-group{% if starttrajectoryform.name.errors %} has-error {% endif %}">
         <label for "{{ starttrajectoryform.name.id_for_label }}" class="col-sm-2">
 	{{ starttrajectoryform.name.id_for_label }}</label>
-        <div class="col-sm-11">
+        <div class="col-sm-8">
 	    {{ starttrajectoryform.name }}
 	    {% for error in starttrajectoryform.name.errors %}
 	        <span class="help-block">{{ error }}</span>
 	    {% endfor %}
 	    <!-- autocompletion would be awesome -->
         </div>
-         <div class="col-sm-1">
+         <div class="col-sm-offset-1 col-sm-1">
           <button type="button" class="btn btn-primary">+</button>
         </div>
       </div>
