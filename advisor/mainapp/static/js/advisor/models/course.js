@@ -1,11 +1,11 @@
 var advisor = advisor || {};
 
-advisor.Course = Backbone.Model.extend({
+advisor.Course = Backbone.RelationalModel.extend({
 
   defaults: {
-    dept: 'CS',
-    courseid: 310
-    description: "desc"
+    dept: '',
+    courseid: 0,
+    description: ''
   },
 
   // Toggle the `completed` state of this todo item.
