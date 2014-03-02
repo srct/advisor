@@ -21,7 +21,8 @@ from mainapp.forms import StartTrajectoryForm, StudentForm
 def build_trajectory(request):
     #process
     semester_key = 1
-    return HttpResponse(semester_key)
+    return render(request, 'build.html')
+
 class StartTrajectoryView(FormView):
     template_name = 'new.html'
     form_class = StartTrajectoryForm

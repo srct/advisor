@@ -10,7 +10,8 @@ advisor.ProgramCollectionView = Backbone.View.extend({
 
   addOne: function(program) {
     var view = new advisor.ProgramView({ model: program });
-    this.$el.append( view.render().el );
+    var el = view.render().el
+    this.$el.append(el);
   },
 
   // Add all items in the **Todos** collection at once.

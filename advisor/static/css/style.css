@@ -29,6 +29,32 @@ body {
   list-style-type: none;
 }
 
+.program {
+  text-align: center;
+}
+
+.course {
+  width: 160px;
+  height: 80px;
+  margin: 10px;
+  text-align: center;
+  padding-top: 18px;
+  font-size: 24px;
+  color: #171C21;
+  display: inline-block;
+  background-color: #2980B9;
+}
+
+.CS {
+  background-color: #3498DB;
+}
+.MATH {
+  background-color: 
+}
+.ASTR, .PHYS, .CHEM, .BIOL {
+  background-color: #27AE60;
+}
+
 /* Set the fixed height of the footer here */
 #footer {
   height: 30px;

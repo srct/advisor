@@ -4,7 +4,7 @@ advisor.Program = Backbone.RelationalModel.extend({
   urlRoot: '/api/programs',
 
   initialize: function() {
-    this.fetch();
+    this.fetch()
   },
 
   relations: [{
