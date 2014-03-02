@@ -32,11 +32,9 @@ New | MySchool Advisor
 	    {% endfor %}
 	    <!-- autocompletion would be awesome -->
         </div>
-            <select multiple class="form-control">
-                {% for major in majors %}
-                <option value="{{major.id}}">{{major}}</option>
-            </select>
-                {% endfor %}
+         <div class="col-sm-offset-1 col-sm-1">
+          <button type="button" class="btn btn-primary">+</button>
+        </div>
       </div>
 
       <!-- Javascript for adding an additional field -->
