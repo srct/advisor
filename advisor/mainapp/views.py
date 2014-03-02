@@ -35,6 +35,14 @@ def searchMajorMinor(request):
             return build_trajectory(request)
 
 #API SHIT
+def profile(request):
+    current_user = Student.objects.get(user__username=request.user.username)
+
+    return render_to_response('profile.html', {
+            "user" : current_user,
+    },
+    context_instance = RequestContext(request),
+    )
 
 class RequirementViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Requirement.objects.all()
@@ -148,11 +156,3 @@ class CoursesTaken(UpdateView):
     model = Student
     template_name = 'student_form.html'
     form_class = StudentForm
-
-class ProfileView(LoginRequiredMixin, DetailView):
-    model = Student
-    template_name = 'profile.html'
-
-    def get_queryset(self):
-        qs = super(ProfileView,self).get_queryset()
-        return qs.filter(user=self.request.user)
