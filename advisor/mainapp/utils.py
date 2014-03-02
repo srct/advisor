@@ -12,9 +12,19 @@ from mainapp.models import Course # import more
 
 ### editing a trajectory
 
-def requirementFulfilled():
-    """ is this handled in the models? if a requirement if fulfilled, then don't look at thoses classes again """
-    return True
+def requirementsFulfilled(alreadyTaken, program):
+    """ for *A* program, return a list of all requirements fulfilled """
+
+    requirementsFulfilled = []
+    alreadyTaken = set(alreadyTaken)
+    requirements = program.requirements
+    for requirement in requirements:
+        courseRequirements = set(requirement.coursegroup.courses)
+        requirementCoursesTaken = intersection(courseRequirements, alreadyTaken)
+        if len(requirementCoursesTaken) is requirement.coursegroup.numneeded:
+            requirementsFulfilled.append(requirement)
+
+    return requirementsFulfilled
 
 #def alreadyTaken():
 #    """ return all of the courses that a student has already taken so far
@@ -83,4 +93,5 @@ def enoughCredits(previousCourses, numRequired):
 
 def trajectoryEnds():
     """ returns all paths to each end node of the trajectories tree """
+    for 
     return True
