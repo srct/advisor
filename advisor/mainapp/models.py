@@ -8,7 +8,8 @@ class Student(TimeStampedModel):
     user = models.OneToOneField(User)
     slug = AutoSlugField(populate_from='user', null=True)
     programs = models.ManyToManyField('Program')
-    trajectory = models.OneToOneField('Trajectory', blank=True)
+    trajectory = models.OneToOneField('Trajectory', blank=True,
+    null=True)
     coursestaken = models.ManyToManyField('Course', blank=True,
         verbose_name="Courses Taken")
     dateOfGrad = models.DateField("Graduation Date")
