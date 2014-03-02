@@ -59,8 +59,9 @@ class Program(TimeStampedModel):
 
 
 class Major(Program):
-    gened = models.ForeignKey('GenEd')
-    concentration = models.ForeignKey('Concentration', blank=True)
+    gened = models.ForeignKey('GenEd', blank=True, null=True)
+    concentrations = models.ManyToManyField('Concentration', blank=True,
+        null=True)
 
 
 class Minor(Program):
@@ -72,7 +73,7 @@ class GenEd(Program):
 
 
 class Concentration(Program):
-    pass
+    associatedmajors = models.ForeignKey(Major, null=True)
 
 
 class Requirement(TimeStampedModel):
