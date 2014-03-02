@@ -26,6 +26,10 @@ class StartTrajectoryView(FormView):
     template_name = 'new.html'
     form_class = StartTrajectoryForm
 
+def compare(request):
+    return render_to_response('compare.html', {
+    })
+
 #API SHIT
 @login_required
 def profile(request):
