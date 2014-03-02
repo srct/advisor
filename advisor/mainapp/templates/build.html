@@ -46,8 +46,14 @@
 {% block javascript %}
   {{ block.super }}
   <script src="/static/js/grids.js"></script>
-  <script src="/static/js/advisor/models/requirement.js"></script>
   <script src="/static/js/advisor/models/program.js"></script>
+  <script src="/static/js/advisor/models/requirement.js"></script>
   <script src="/static/js/advisor/models/course.js"></script>
+  <script src="/static/js/advisor/collections/programs.js"></script>
+  <script src="/static/js/advisor/collections/requirements.js"></script>
+  <script src="/static/js/advisor/collections/courses.js"></script>
+  <script src="/static/js/advisor/views/course-view.js"></script>
+  <script src="/static/js/advisor/views/programView.js"></script>
+  <script src="/static/js/advisor/views/programCollectionView.js"></script>
   <script src="/static/js/advisor/app.js"></script>
 {% endblock %}
