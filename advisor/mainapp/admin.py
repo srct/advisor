@@ -10,30 +10,36 @@ class StudentAdmin(admin.ModelAdmin):
 
 class CourseAdmin(admin.ModelAdmin):
     search_fields = ['dept', 'courseid']
+    filter_horizontal = ('prerequisites', 'corequisites',)
 
 
 class CourseGroupAdmin(admin.ModelAdmin):
     search_fields = ['name']
+    filter_horizontal = ('courses',)
 
 
 class MajorAdmin(admin.ModelAdmin):
     search_fields = ['name']
+    filter_horizontal = ('requirements', 'concentrations',)
 
 
 class MinorAdmin(admin.ModelAdmin):
     search_fields = ['name']
+    filter_horizontal = ('requirements',)
 
 
 class GenEdAdmin(admin.ModelAdmin):
     search_fields = ['name']
+    filter_horizontal = ('requirements',)
 
 
 class ConcentrationAdmin(admin.ModelAdmin):
     search_fields = ['name']
+    filter_horizontal = ('requirements',)
 
 
 class RequirementAdmin(admin.ModelAdmin):
-    pass
+    filter_horizontal = ('courses',)
 
 
 admin.site.register(Student, StudentAdmin)
