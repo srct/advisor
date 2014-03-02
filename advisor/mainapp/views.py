@@ -6,10 +6,10 @@ from rest_framework import viewsets
 
 from mainapp.serializers import (ProgramSerializer, CourseSerializer,
 CourseGroupSerializer, TrajectorySerializer, SemesterSerializer,
-BuildResponseSerializer)
+BuildResponseSerializer, RequirementSerializer)
 from mainapp.models import (Trajectory, Program, Major, Minor, GenEd,
 Concentration, MetaCourse, Course, CourseGroup, Semester, BuildResponse,
-Student)
+Student, Requirement)
 from mainapp.forms import StartTrajectoryForm, StudentForm
 # Create your views here.
 #FBV's
@@ -34,6 +34,10 @@ def searchMajorMinor(request):
             return build_trajectory(request)
 
 #API SHIT
+
+class RequirementViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Requirement.objects.all()
+    serializer_class = RequirementSerializer
 
 class ProgramViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Program.objects.all()

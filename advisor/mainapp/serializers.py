@@ -1,6 +1,8 @@
 from rest_framework import serializers
 from mainapp.models import (Trajectory, Program, Major, Minor, GenEd, Concentration,
-    MetaCourse, Course, CourseGroup, Semester, BuildResponse)
+    MetaCourse, Course, CourseGroup, Semester, BuildResponse, Requirement)
+
+class RequirementSerializer(serializers.ModelSerializer):
 
 class TrajectorySerializer(serializers.ModelSerializer):
     class Meta:
