@@ -91,7 +91,25 @@ def enoughCredits(previousCourses, numRequired):
 
 ### student page
 
-def trajectoryEnds():
-    """ returns all paths to each end node of the trajectories tree """
-    for 
-    return True
+def allTrajectories(topSemester):
+    """ returns all paths to each end node of a trajectories tree
+        for the user page, do this over all trees """
+    # traverse the tree
+
+    # find the end leafs
+
+    # find the shortest path to each leaf
+
+    # add the list of that semesters to the allTrajectories list
+    
+    # return said list of lists
+
+    #endLeafs = []
+    #for
+    allTrajectories  = []
+    #for
+    #    singleTrajectory = []
+    #    singleTrajectory.append(semester)
+    #    allTrajectories.append(singleTrajectory)
+
+    return allTrajectories
