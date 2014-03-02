@@ -1,4 +1,4 @@
-from mainapp.models import Course # import more
+from mainapp.models import Course, Semester, Trajectory # import more
 
 ### common functionality
 
@@ -109,6 +109,7 @@ def requirementsFulfilled(taken, program):
     # this should return true or false
     return fulfilled
 
+
 #def alreadyTaken():
 #    """ return all of the courses that a student has already taken so far
 #        in the trajectory """
@@ -121,7 +122,7 @@ def remainingReqCourses(taken, programCourses):
     taken = set(taken)
     programCourses = set(programCourses)
 
-    remainingReqCourses = taken.intersection(programCourses)
+    remainingReqCourses = programCourses.difference(taken)
 
     return remainingReqCourses
 
@@ -133,8 +134,8 @@ def nextCourses(remainingReqCourses, taken):
         reqs = set()
         for prereq in course.preq:
             reqs.add(prereq)
-        for coreq in course.coreq:
-            reqs.add(coreq)
+        #for coreq in course.coreq:
+        #    reqs.add(coreq)
         for req in reqs:
             if req in taken:
                 nextcourses.append(course)
@@ -175,6 +176,40 @@ def enoughCredits(previousCourses, numRequired):
         enoughcredits = True
 
     return enoughcredits
+
+
+def genTrajectories(taken, programs, user):
+    tj = Trajectory(user=user, semesters=[])
+    taken = set(taken)
+    sem = Semester(number=0, user=user, courses=taken,
+        programs=programs)
+    tj.semesters.append(sem)
+    programCourses = []
+    for program in programs:
+        programcourses+=programCourses(program)
+    remainingCourses=remainingReqCourses(taken, programCourses)
+    while True:
+        availableCourses=nextCourses(remainingCourses, taken)
+        semclasses=[]
+        for i in xrange(5):
+            doneclass = availableCourses.pop()
+            semclasses.append(doneclass)
+            taken.add(doneclass)
+        newsem = Semester(number=sem.number+1, user=user, courses=semclasses,
+            programs=programs)
+        tj.semesters.append(sem)
+        sem = newsem
+        
+        failed=False
+        for program in programs:
+            if requirementsFulfilled(program, taken) != program.requirements:
+                failed=True
+        if not failed:
+             break
+    return tj
+            
+    
+
 
 '''def generatedTrajectory(taken, programs, user):
     
