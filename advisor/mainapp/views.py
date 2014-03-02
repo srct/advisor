@@ -42,9 +42,8 @@ def build_trajectory(request):
         'trac' : trac,
         })
     else:
-        reutrn render_to_response('build.html', {
-        ,
-        })
+        return render_to_response('build.html') 
+        
 class StartTrajectoryView(FormView):
     template_name = 'new.html'
     form_class = StartTrajectoryForm
