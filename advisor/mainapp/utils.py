@@ -189,11 +189,16 @@ def genTrajectories(taken, programs, user):
         takencourse.semester=sem
     sem.courses = taken
     sem.programs = programs
-    tj = Trajectory(user=user, semesters=[sem])
-    programCourses = []
+    try:
+        tj = Trajectory.objects.get(user=user)
+    except:
+        tj = Trajectory(user=user)
+        tj.save()
+    tj.semesters=[sem]
+    programcourses = []
     for program in programs:
-        programcourses+=programCourses(program)
-    remainingCourses=remainingReqCourses(taken, programCourses)
+        programcourses = programcourses + programCourses(program)
+    remainingCourses=remainingReqCourses(taken, programcourses)
     while True:
         availableCourses=nextCourses(remainingCourses, taken)
         semclasses=[]
