@@ -9,8 +9,8 @@ def programCourses(program):
     print requirements
     for requirement in requirements:
         print requirement
-        for coursegroup in requirement.coursegroup:
-            for course in coursegroup.courses:
+        for coursegroup in requirement.coursegroup.all():
+            for course in coursegroup.courses.all():
                 courses.append(course)
 
     return courses
