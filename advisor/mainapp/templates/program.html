@@ -1,0 +1,33 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}
+Program | YourSchool Advisor
+{% endblock %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-12">
+  <h1>The Program's Name</h1>
+  </div>
+</div>
+
+<div class="row">
+  <div>
+    Description and Gened
+  </div>
+</div>
+
+for coursecollection in program
+<div class="row">
+  <div>
+  coursecollection info
+  </div>
+  <div>
+  for course in coursecollection
+  </div>
+  endfor
+</div>
+endfor
+
+{% endblock %}
