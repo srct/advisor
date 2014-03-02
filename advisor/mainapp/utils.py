@@ -182,8 +182,12 @@ def genTrajectories(taken, programs, user):
     if not taken:
         taken = ['']
     taken = set(taken)
-    sem = Semester(number=0, user=user, courses=taken,
-        programs=programs)
+    print taken
+    sem = Semester(number=0, user=user)
+    for takencourse in taken:
+        takencourse.semester=sem
+    sem.courses = taken
+    sem.programs = programs
     tj = Trajectory(user=user, semesters=[sem])
     programCourses = []
     for program in programs:
