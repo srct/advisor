@@ -150,4 +150,4 @@ class ProfileView(DetailView):
 
     def get_queryset(self):
         qs = super(ProfileView,self).get_queryset()
-        return qs.filter(student__user=self.request.user)
+        return qs.filter(user=self.request.user)
