@@ -3,7 +3,8 @@ from mainapp.models import (Trajectory, Program, Major, Minor, GenEd, Concentrat
     MetaCourse, Course, CourseGroup, Semester, BuildResponse, Requirement)
 
 class RequirementSerializer(serializers.ModelSerializer):
-
+    class Meta:
+        model = Requirement
 class TrajectorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Trajectory
