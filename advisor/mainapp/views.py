@@ -45,7 +45,7 @@ def profile(request):
             "user" : current_user,
             "firstname" : current_user.user.first_name,
             "advisorname" : current_user.advisorname,
-    }
+    })
     
 
 class RequirementViewSet(viewsets.ReadOnlyModelViewSet):
