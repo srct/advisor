@@ -8,7 +8,8 @@ from mainapp.serializers import (ProgramSerializer, CourseSerializer,
 CourseGroupSerializer, TrajectorySerializer, SemesterSerializer,
 BuildResponseSerializer)
 from mainapp.models import (Trajectory, Program, Major, Minor, GenEd,
-Concentration, MetaCourse, Course, CourseGroup, Semester, BuildResponse)
+Concentration, MetaCourse, Course, CourseGroup, Semester, BuildResponse,
+Student)
 from mainapp.forms import StartTrajectoryForm, StudentForm
 # Create your views here.
 #FBV's
