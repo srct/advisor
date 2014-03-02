@@ -1941,10 +1941,10 @@ fieldset[disabled] .input-group-btn .btn-default.active {
   border-width: 0;
 }
 .navbar-brand {
-  font-size: 18px;
+  font-size: 24px;
   line-height: 1.042;
   font-weight: 700;
-  padding: 0px 16px;
+  padding: 16px 21px;
 }
 .navbar-brand > [class*="fui-"] {
   font-size: 19px;
