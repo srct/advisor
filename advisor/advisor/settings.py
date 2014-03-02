@@ -40,6 +40,7 @@ INSTALLED_APPS = (
     'rest_framework',
     'south',
     'django_gravatar',
+    'autocomplete_light',
 )
 
 MIDDLEWARE_CLASSES = (
