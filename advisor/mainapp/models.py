@@ -76,6 +76,9 @@ class Requirement(TimeStampedModel):
     name = models.CharField(max_length=50)
     courses = models.ManyToManyField('MetaCourse')
 
+    def __unicode__(self):
+        return '%s' % self.name
+
 
 class MetaCourse(TimeStampedModel):
     title = models.CharField(max_length=50)
