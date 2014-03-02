@@ -1,4 +1,4 @@
-from mainapp.models import Course, Semester, Trajectory # import more
+from mainapp.models import Course, CourseGroup, Semester, Trajectory # import more
 
 ### common functionality
 
