@@ -1,13 +1,13 @@
 {% extends 'layouts/base.html' %}
-<h3>
-Hello {{ firstname }}! | Your advisor is:  {{ advisorname }}
-</h3>
 {% block content %}
 {% load gravatar %}
     <div class="row clearfix">
         <div class="col-md-4 column">
  <img class="img-circle img-responsive center-block" src="{% gravatar url
  '{{ user.email }}' 200 %}">
+<h3>
+Hello {{ firstname }}! | Your advisor is:  {{ advisorname }}
+</h3>
         </div>
         <div class="col-md-4 column">
         </div>
