@@ -1,13 +1,13 @@
-from django import forms
+import floppyforms as forms
 from django.db import models
 from django.core.exceptions import ValidationError
 from mainapp.models import Student, Major, Minor, GenEd
 
 # form on new page
 class StartTrajectoryForm(forms.Form):
-    majors = forms.ChoiceField(choices=[(obj.id, obj.name) for obj in
+    majors = forms.ChoiceField(widget=forms.SelectMultiple,choices=[(obj.id, obj.name) for obj in
     Major.objects.all()])
-    minors = forms.ChoiceField(choices=[(obj.id, obj.name) for obj in
+    minors = forms.ChoiceField(widget=forms.SelectMultiple,choices=[(obj.id, obj.name) for obj in
     Minor.objects.all()])
 
 class StudentForm(forms.ModelForm):
