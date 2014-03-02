@@ -27,8 +27,8 @@ def build_trajectory(request):
         #only lets you do one
         major = form['majors'].value() 
         minor = form['minors'].value()
-        to_search_major = Major.objects.get(pk=major)
-        to_search_minor = Minor.objects.get(pk=minor)
+        to_search_major = Major.objects.get(pk=major[0])
+        to_search_minor = Minor.objects.get(pk=minor[0])
         programs = to_search_major + to_search_minor
         user_in = User.object.get(user=request.user)
         trac = genTrajectories(taken=None,programs=programs,user=user_in)
