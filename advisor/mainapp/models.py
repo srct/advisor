@@ -11,9 +11,10 @@ class Student(TimeStampedModel):
     trajectory = models.OneToOneField('Trajectory', blank=True,
     null=True)
     coursestaken = models.ManyToManyField('Course', blank=True,
-        verbose_name="Courses Taken")
+        null=True, verbose_name="Courses Taken")
     dateOfGrad = models.DateField("Graduation Date")
-    advisorname = models.OneToOneField('AdvisorAdminUser', blank=True)
+    advisorname = models.OneToOneField('AdvisorAdminUser', blank=True,
+    null=True)
 
     def __unicode__(self):
         return '%s' % self.user
