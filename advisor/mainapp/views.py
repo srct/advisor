@@ -1,11 +1,19 @@
 from django.shortcuts import render
-from django.views.generic import CreateView, ListView, DetailView, DeleteView, UpdateView
+from django.views.generic import (CreateView, ListView, DetailView, DeleteView,
+UpdateView, FormView)
 
 from rest_framework import viewsets
 
-from mainapp.models import Trajectory, Program, Major, Minor, GenEd, Concentration, MetaCourse, Course, CourseGroup
-from mainapp.serializers import ProgramSerializer, CourseSerializer, CourseGroupSerializer, TrajectorySerializer
+from mainapp.serializers import (ProgramSerializer, CourseSerializer,
+CourseGroupSerializer, TrajectorySerializer, SemesterSerializer)
+from mainapp.models import (Trajectory, Program, Major, Minor, GenEd,
+Concentration, MetaCourse, Course, CourseGroup, Semester)
+from mainapp.forms import StartTrajectoryForm
 # Create your views here.
+#FBV's
+# Generic Views
+def build_trajectory(request):
+    return render(request, 'build.html')
 #API SHIT
 
 class ProgramViewSet(viewsets.ReadOnlyModelViewSet):
@@ -20,10 +28,23 @@ class CourseGroupViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = CourseGroup.objects.all()
     serializer_class = CourseGroupSerializer
 
-
 class TrajectoryViewSet(viewsets.ModelViewSet):
     queryset = Trajectory.objects.all()
     serializer_class = TrajectorySerializer
+
+class SemesterViewSet(viewsets.ModelViewSet):
+    queryset = Semester.objects.all()
+    serializer_class = SemesterSerializer
+#FORM CBV's
+class StartTrajectoryForm(FormView):
+    form_class = StartTrajectoryForm
+
+    def form_valid(self,form):
+        return super(StartTrajectoryForm, self).form_valid(form)
+
+    def clean(self,form):
+        return self.cleaned_data
+
 
 #Trajectory CBVS
 class CreateTrajectory(CreateView):

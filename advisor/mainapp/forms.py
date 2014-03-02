@@ -4,42 +4,32 @@ from django.core.exceptions import ValidationError
 from mainapp.models import Student, Major, Minor, GenEd
 
 # form on new page
-class NewMajorForm( ModelForm ):
+class StartTrajectoryForm(forms.Form):
+    major = forms.CharField(max_length=100)
+    minor = forms.CharField(max_length=100)
+
+class SelectMajorForm(forms.ModelForm):
     class Meta:
         model = Major
-        fields = ['name',
-        # not immediately sure how to take other objects as fields
-        # 'concentration',
-        ]
-        exclude = ['slug', 'description', 'courses', 'gened',
-        # remove when figure out how
-        'concentration',
-        ]
+        fields = ['name', ]
+        exclude = ['slug', 'description', 'courses', 'gened', 'concentration',]
         labels = {
-        'name':'Major',
-        # 'concentration':'Concentration',
+            'major' : 'Major',
         }
         widgets = {
-            'name':forms.TextInput(attrs={
-                'class':'form-control',
-                'placeholder':'Government and International Politics',
-            }),
-            # 'concentration':forms.TextInput(attrs={
-            #    'name':
+            'major':forms.CharField(),
         }
 
-class NewMinorForm( ModelForm ):
-        model = Semester
+class SelectMinorForm(forms.ModelForm):
+    class Meta:
+        model = Minor
         fields = ['name', ]
         exclude = ['slug', 'description', 'courses', ]
         labels = {
-            'name':'Minor',
+            'minor' : 'Minor',
         }
         widgets = {
-            'name':forms.TextInput(attrs={
-                'class':'form-control',
-                'placeholder':'Software Engineering',
-            }),
+            'minor':forms.CharField()
         }
 
 # form on build page

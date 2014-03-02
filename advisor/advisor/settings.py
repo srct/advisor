@@ -84,6 +84,19 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+   os.path.join(BASE_DIR, 'static/'),
+   os.path.join(BASE_DIR, 'mainapp/static/'),
+)
+STATICFILES_FINDERS = (
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder"
+)
+
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR, 'templates/'),
+    os.path.join(BASE_DIR, 'mainapp/templates/'),
+)
 
 REST_FRAMEWORK = {
     # Use hyperlinked styles by default.
