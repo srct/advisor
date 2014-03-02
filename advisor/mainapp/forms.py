@@ -7,7 +7,7 @@ from mainapp.models import Student, Major, Minor, GenEd
 class StartTrajectoryForm(forms.Form):
     major = forms.CharField(max_length=100)
     minor = forms.CharField(max_length=100)
-
+'''
 class SelectMajorForm(forms.ModelForm):
     class Meta:
         model = Major
@@ -59,3 +59,4 @@ class StudentUpdateForm( ModelForm ):
         }
         widgets = {
         }
+'''
