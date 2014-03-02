@@ -5,12 +5,8 @@ from mainapp.models import Student, Major, Minor, GenEd
 
 # form on new page
 class StartTrajectoryForm(forms.Form):
-    majors = Major.objects.all()
-    print majors
-    minors = Minor.objects.all()
-    print minors
-    major = forms.ChoiceField(majors)
-    minor = forms.ChoiceField(majors)
+    majors = forms.ChoiceField(choices=Major.objects.all())
+    minors = forms.ChoiceField(choices=Minor.objects.all())
 
 class StudentForm(forms.ModelForm):
     class Meta:
