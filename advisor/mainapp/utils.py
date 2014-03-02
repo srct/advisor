@@ -6,10 +6,9 @@ def programCourses(program):
 
     courses = []
     requirements = program.requirements
-    for requirement in requirements:
-        for coursegroup in requirement.coursegroup:
-            for course in coursegroup.courses:
-                courses.append(course)
+    for requirement in requirements.all():
+        for course in requirement.courses.all():
+            courses.append(course)
 
     return courses
 
@@ -132,7 +131,11 @@ def nextCourses(remainingReqCourses, taken):
     nextcourses = []
     for course in remainingReqCourses:
         reqs = set()
-        for prereq in course.preq:
+        try:
+            c = Course.objects.get(title=course)
+        except:
+           pass 
+        for prereq in c.prerequisites.all():
             reqs.add(prereq)
         #for coreq in course.coreq:
         #    reqs.add(coreq)
@@ -182,13 +185,23 @@ def genTrajectories(taken, programs, user):
     if not taken:
         taken = ['']
     taken = set(taken)
-    sem = Semester(number=0, user=user, courses=taken,
-        programs=programs)
-    tj = Trajectory(user=user, semesters=[sem])
-    programCourses = []
+    print taken
+    sem = Semester(number=0, user=user)
+    sem.save()
+    for takencourse in taken:
+        takencourse.semester=sem
+    sem.courses = taken
+    sem.programs = programs
+    try:
+        tj = Trajectory.objects.get(user=user)
+    except:
+        tj = Trajectory(user=user)
+        tj.save()
+    tj.semesters=[sem]
+    programcourses = []
     for program in programs:
-        programcourses+=programCourses(program)
-    remainingCourses=remainingReqCourses(taken, programCourses)
+        programcourses = programcourses + programCourses(program)
+    remainingCourses=remainingReqCourses(taken, programcourses)
     while True:
         availableCourses=nextCourses(remainingCourses, taken)
         semclasses=[]

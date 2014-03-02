@@ -32,7 +32,7 @@ class Semester(models.Model):
     number = models.IntegerField("Semester Number")
     user = models.ForeignKey(Student)
     courses = models.ManyToManyField('Course', blank=True)
-    programs = models.ManyToManyField('Program')
+    programs = models.ManyToManyField('Program', related_name="progs+")
     nextsemester = models.ForeignKey('self', blank=True, null=True)
     requirementssatisfied = models.ManyToManyField('Requirement',
         related_name="reqssatisfied+", blank=True,
@@ -43,7 +43,7 @@ class Semester(models.Model):
 
 
 class Trajectory(TimeStampedModel):
-    user = models.OneToOneField(User, related_name="trajectory")
+    user = models.OneToOneField(Student, related_name="trajectory-user")
     semesters = models.ManyToManyField(Semester)
 
 
@@ -77,6 +77,9 @@ class Concentration(Program):
     associatedmajors = models.ForeignKey(Major, null=True,
         verbose_name="Associated Major")
 
+
+class RequirementManager(models.Manager):
+    pass
 
 class Requirement(TimeStampedModel):
     name = models.CharField(max_length=50)
