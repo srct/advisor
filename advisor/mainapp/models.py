@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 
 class Student(TimeStampedModel):
     user = models.OneToOneField(User)
-    slug = AutoSlugField(populate_from='name', null=True)
+    slug = AutoSlugField(populate_from='user', null=True)
     programs = models.ManyToManyField('Program')
     trajectory = models.OneToOneField('Trajectory', blank=True)
     coursestaken = models.ManyToManyField('Course', blank=True,
