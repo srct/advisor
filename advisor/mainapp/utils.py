@@ -23,7 +23,6 @@ def programCourses(program):
 
 def assignedWeights(weightedCourse, programCourses):
     """ assign weights to all courses in a program for automation """
-    weights = {}
 
     for weightedCourse in programCourses:
         weightedCourseCounter = 0
@@ -44,6 +43,16 @@ def assignedWeights(weightedCourse, programCourses):
 
     return weights
 
+def courseWeighting(programCourses):
+
+    weights = {}
+
+    weightedCourse = programCourses[0]
+
+    assignedWeights(weightedCourse, programCourses)
+
+    return weights    
+
 def customAssignedWeights(weights, selectedCourses):
     """ remove courses that a student has not selected from the weighted
         courses """
@@ -53,9 +62,6 @@ def customAssignedWeights(weights, selectedCourses):
         del customweights[course]
 
     return customweights
-
-def shortestPath(weights):
-    return True
 
 ### editing a trajectory
 
@@ -73,7 +79,8 @@ def requirementsFulfilled(taken, program):
 
             if len(requirementCoursesTaken) is requirement.coursegroup.numneeded:
                 fulfilled.append(requirement)
-
+    
+    # this should return true or false
     return fulfilled
 
 #def alreadyTaken():
@@ -141,6 +148,37 @@ def enoughCredits(previousCourses, numRequired):
         enoughcredits = True
 
     return enoughcredits
+
+def generatedTrajectory():
+    
+    generatedTrajectory = []
+
+    # get the course's programs
+    programCourses()
+
+    # find the weights of all of the programs
+    courseWeighting()
+
+    # get the courses you have to take next
+    remainingReqCourses()
+    requirementsFulfilled()
+    nextCourses()
+
+    # of those, pick five of the heaviest
+    ### IMPLEMENT THIS
+    
+
+    # retrieve the next courses you need to take, and so forth
+    remainingReqCourses()
+    requirementsFulfilled()
+
+    # if there are no remainingReqCourses or requirementsFulfilled is True
+
+    # do you have enough credits?
+    enoughCredits()
+
+    # hooray!
+    return generatedTrajectory
 
 ### student page
 
