@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404, render_to_response 
 from django.template import RequestContext
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.views.generic import (CreateView, ListView, DetailView, DeleteView,
 UpdateView, FormView)
@@ -14,6 +15,7 @@ from mainapp.models import (Trajectory, Program, Major, Minor, GenEd,
 Concentration, MetaCourse, Course, CourseGroup, Semester, BuildResponse,
 Student, Requirement)
 from mainapp.forms import StartTrajectoryForm, StudentForm
+from mainapp.utils import genTrajectories
 # Create your views here.
 #FBV's
 # Generic Views
@@ -25,6 +27,11 @@ def build_trajectory(request):
         #only lets you do one
         major = form['majors'].value() 
         minor = form['minors'].value()
+        to_search_major = Major.objects.get(pk=major)
+        to_search_minor = Minor.objects.get(pk=minor)
+        programs = to_search_major + to_search_minor
+        user_in = User.object.get(user=request.user)
+        trac = genTrajectories(taken=None,programs=programs,user=user_in)
         #majors = form.fie
     return render_to_response('build.html', {
     })
