@@ -32,11 +32,9 @@ New | MySchool Advisor
 	    {% endfor %}
 	    <!-- autocompletion would be awesome -->
         </div>
-            <select multiple class="form-control">
-                {% for major in starttrajectoryform.majors.field.choices %}
-                <option value="{{major.id}}">{{major}}</option>
-                {% endfor %}
-                </select>
+         <div class="col-sm-offset-1 col-sm-1">
+          <button type="button" class="btn btn-primary">+</button>
+        </div>
       </div>
 
       <!-- Javascript for adding an additional field -->
@@ -53,12 +51,9 @@ New | MySchool Advisor
 	    {% endfor %}
 	    <!-- autocompletion would be awesome -->
         </div>
-                 <select multiple class="form-control">
-                {% for minor in starttrajectoryform.minors.fieldchoices %}
-                <option value="{{minor.id}}">{{minor}}</option>
-                {% endfor %}
-
-            </select>
+         <div class="col-sm-offset-1 col-sm-1">
+          <button type="button" class="btn btn-primary">+</button>
+        </div>
       </div>
 
       <!-- Javascript for adding an additional field -->
