@@ -6,15 +6,34 @@ from mainapp.models import Course # import more
 #    """ the maximum programs allowed, e.g. 2 majors and 3 minors tops """
 #   return True
 
+def programCourses(program):
+
+    programCourses = []
+    requirements = program.requirements
+    for requirement in requirements:
+        for coursegroup in requirement.coursegroup:
+            for course in coursegroup.courses:
+                programCourses.append(course)
+
+    return programCourses
+
 ### automatically building a trajectory
 
-def someautomaticfunction():
-    """ Brute force a path? """
-    return True
+def assignWeights(program):
 
-def someotherautomatedfunction():
-    """ Weigh some things over other things in choosing how to add courses
-        to a semester """
+    assignWeights = {}
+
+    for weighedCourse in programCourses:
+        courseCounter = 0
+        reqs = set()
+        course.prereq.append(reqs)
+        course.coreq.append(reqs)
+        for req in reqs:
+            for course in programCourses:
+                if req is course:
+                    courseCounter += 1
+        assignWeights[weighedCourse] = coursecounter
+    
     return True
 
 ### editing a trajectory
@@ -25,11 +44,14 @@ def requirementsFulfilled(alreadyTaken, program):
     requirementsFulfilled = []
     alreadyTaken = set(alreadyTaken)
     requirements = program.requirements
+
     for requirement in requirements:
-        courseRequirements = set(requirement.coursegroup.courses)
-        requirementCoursesTaken = intersection(courseRequirements, alreadyTaken)
-        if len(requirementCoursesTaken) is requirement.coursegroup.numneeded:
-            requirementsFulfilled.append(requirement)
+        for coursegroup in requirement.coursegroup:
+            courseRequirements = set(coursegroup.courses)
+            requirementCoursesTaken = intersection(courseRequirements, alreadyTaken)
+        
+            if len(requirementCoursesTaken) is requirement.coursegroup.numneeded:
+                requirementsFulfilled.append(requirement)
 
     return requirementsFulfilled
 
@@ -43,7 +65,7 @@ def remainingReqCourses(alreadyTaken, program):
     the already taken courses """
 
     alreadyTaken = set(alreadyTaken)
-    programCourses = set(program.requirements.coursegroup.courses)
+    programCourses = set( programCourses(program) )
 
     remainingReqCourses = intersection(alreadyTaken, programCourses)
 
