@@ -40,6 +40,8 @@
   <title> {% block title %} {% endblock %} </title>
 </head>
   <body>
+    {% block templates %}
+    {% endblock %}
     <div id = "wrap">
       {% include 'layouts/navbar.html' %}
 

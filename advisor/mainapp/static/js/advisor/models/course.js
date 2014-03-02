@@ -1,6 +1,7 @@
 var advisor = advisor || {};
 
 advisor.Course = Backbone.RelationalModel.extend({
+  urlRoot: '/api/courses',
 
   defaults: {
     dept: '',
