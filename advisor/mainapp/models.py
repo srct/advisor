@@ -3,16 +3,19 @@ from autoslug import AutoSlugField
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class Student(TimeStampedModel):
     user = models.OneToOneField(User)
     programs = models.ManyToManyField('Program')
     trajectory = models.OneToOneField('Trajectory', blank=True)
-    coursestaken = models.ManyToManyField('Course', blank=True)
-    dateOfGrad = models.DateField()
+    coursestaken = models.ManyToManyField('Course', blank=True,
+        verbose_name="Courses Taken")
+    dateOfGrad = models.DateField("Graduation Date")
     advisorname = models.OneToOneField('AdvisorAdminUser', blank=True)
 
     def __unicode__(self):
         return '%s' % self.user
+
 
 class AdvisorAdminUser(TimeStampedModel):
     user = models.OneToOneField(User, related_name="advisorname")
@@ -23,13 +26,14 @@ class AdvisorAdminUser(TimeStampedModel):
 
 
 class Semester(models.Model):
-    number = models.IntegerField()
+    number = models.IntegerField("Semester Number")
     user = models.ForeignKey(Student)
     courses = models.ManyToManyField('Course', blank=True)
     programs = models.ManyToManyField('Program')
     nextsemester = models.ForeignKey('self', blank=True, null=True)
     requirementssatisfied = models.ManyToManyField('Requirement',
-        related_name="reqssatisfied+", blank=True)
+        related_name="reqssatisfied+", blank=True,
+        verbose_name="Requirements Satisfied")
 
     def __unicode__(self):
         return '%s' % self.number
@@ -72,11 +76,14 @@ class Requirement(TimeStampedModel):
     name = models.CharField(max_length=50)
     courses = models.ManyToManyField('MetaCourse')
 
+    def __unicode__(self):
+        return '%s' % self.name
+
 
 class MetaCourse(TimeStampedModel):
     title = models.CharField(max_length=50)
     slug = AutoSlugField(populate_from='title')
-    catalogyear = models.IntegerField()
+    catalogyear = models.IntegerField("Catalog Year")
     description = models.TextField(blank=True)
 
     def __unicode__(self):
@@ -84,20 +91,25 @@ class MetaCourse(TimeStampedModel):
 
 
 class Course(MetaCourse):
-    uniqname = models.CharField(max_length=20,
+    uniqname = models.CharField("Unique ID", max_length=20,
         unique=True)
-    dept = models.CharField(max_length=10)
-    courseid = models.IntegerField()
+    dept = models.CharField("Department", max_length=10)
+    courseid = models.IntegerField("ID Number")
     prerequisites = models.ManyToManyField(MetaCourse,
         blank=True, related_name='prereq+')
     corequisites = models.ManyToManyField(MetaCourse,
         blank=True, related_name='coreq+')
     credits = models.IntegerField()
-    
+
     def __unicode__(self):
         return '%s %s' % (self.dept, self.courseid)
 
 
 class CourseGroup(MetaCourse):
     courses = models.ManyToManyField(Course)
-    numneeded = models.IntegerField()
+    numneeded = models.IntegerField("Number Needed")
+
+
+class BuildResponse(TimeStampedModel):
+    semester = models.ForeignKey(Semester)
+    programs = models.ManyToManyField(Program)

@@ -85,8 +85,8 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
-   os.path.join(BASE_DIR, 'static/'),
-   os.path.join(BASE_DIR, 'mainapp/static/'),
+    os.path.join(BASE_DIR, 'static/'),
+    os.path.join(BASE_DIR, 'mainapp/static/'),
 )
 STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.FileSystemFinder",
@@ -109,7 +109,7 @@ REST_FRAMEWORK = {
 
 }
 SWAGGER_SETTINGS = {
-    "exclude_namespaces": [], # List URL namespaces to ignore
+    "exclude_namespaces": [],  # List URL namespaces to ignore
     "api_version": '0.1',  # Specify your API's version
     "api_path": "/api",  # Specify the path to your API not a root level
     "enabled_methods": [  # Specify which methods to enable in Swagger UI

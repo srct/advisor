@@ -8,27 +8,27 @@ class StudentAdmin(admin.ModelAdmin):
 
 
 class CourseAdmin(admin.ModelAdmin):
-    pass
+    search_fields = ['dept', 'courseid']
 
 
 class CourseGroupAdmin(admin.ModelAdmin):
-    pass
+    search_fields = ['name']
 
 
 class MajorAdmin(admin.ModelAdmin):
-    pass
+    search_fields = ['name']
 
 
 class MinorAdmin(admin.ModelAdmin):
-    pass
+    search_fields = ['name']
 
 
 class GenEdAdmin(admin.ModelAdmin):
-    pass
+    search_fields = ['name']
 
 
 class ConcentrationAdmin(admin.ModelAdmin):
-    pass
+    search_fields = ['name']
 
 
 class RequirementAdmin(admin.ModelAdmin):

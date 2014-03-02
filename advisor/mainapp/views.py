@@ -5,15 +5,18 @@ UpdateView, FormView)
 from rest_framework import viewsets
 
 from mainapp.serializers import (ProgramSerializer, CourseSerializer,
-CourseGroupSerializer, TrajectorySerializer, SemesterSerializer)
+CourseGroupSerializer, TrajectorySerializer, SemesterSerializer,
+BuildResponseSerializer)
 from mainapp.models import (Trajectory, Program, Major, Minor, GenEd,
-Concentration, MetaCourse, Course, CourseGroup, Semester)
-from mainapp.forms import StartTrajectoryForm
+Concentration, MetaCourse, Course, CourseGroup, Semester, BuildResponse,
+Student)
+from mainapp.forms import StartTrajectoryForm, StudentForm
 # Create your views here.
 #FBV's
 # Generic Views
-def build_trajectory(request, majors, minors):
+def build_trajectory(request):
     #process
+    semester_key = 1
     return HttpResponse(semester_key)
 def searchMajorMinor(request):
     #query
@@ -28,7 +31,7 @@ def searchMajorMinor(request):
                 msg = "Something Went Wrong"
             else:
                 msg = "Found Object"
-            return build_trajectory(request, major, minor)
+            return build_trajectory(request)
 
 #API SHIT
 
@@ -51,9 +54,16 @@ class TrajectoryViewSet(viewsets.ModelViewSet):
 class SemesterViewSet(viewsets.ModelViewSet):
     queryset = Semester.objects.all()
     serializer_class = SemesterSerializer
+class BuildResponseViewSet(viewsets.ModelViewSet):
+    queryset = BuildResponse.objects.all()
+    serializer_class = BuildResponseSerializer
 #FORM CBV's
 
 #Trajectory CBVS
+class DetailBuildResponse(DetailView):
+    model = BuildResponse
+    template_name = 'build.html'
+
 class CreateTrajectory(CreateView):
     model = Trajectory
 #To Impement
@@ -125,3 +135,11 @@ class ListCourseGroup(ListView):
     model = CourseGroup
 class DetailCourseGroup(DetailView):
     model = CourseGroup
+class DetailStudent(DetailView):
+    model = Student
+    template_name = 'student.html'
+
+class CoursesTaken(UpdateView):
+    model = Student
+    template_name = 'student_form.html'
+    form_class = StudentForm
