@@ -42,6 +42,14 @@ class RequirementAdmin(admin.ModelAdmin):
     filter_horizontal = ('courses',)
 
 
+class TrajectoryAdmin(admin.ModelAdmin):
+    pass
+
+
+class SemesterAdmin(admin.ModelAdmin):
+    pass
+
+
 admin.site.register(Student, StudentAdmin)
 admin.site.register(Course, CourseAdmin)
 admin.site.register(CourseGroup, CourseGroupAdmin)
@@ -50,4 +58,6 @@ admin.site.register(Minor, MinorAdmin)
 admin.site.register(GenEd, GenEdAdmin)
 admin.site.register(Concentration, ConcentrationAdmin)
 admin.site.register(Requirement, RequirementAdmin)
+admin.site.register(Trajectory, TrajectoryAdmin)
+admin.site.register(Semester, SemesterAdmin)
 admin.site.unregister(Group)
