@@ -43,7 +43,7 @@ class Semester(models.Model):
 
 
 class Trajectory(TimeStampedModel):
-    user = models.OneToOneField(User, related_name="trajectory")
+    user = models.OneToOneField(Student, related_name="trajectory")
     semesters = models.ManyToManyField(Semester)
 
 
