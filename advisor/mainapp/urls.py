@@ -21,9 +21,9 @@ urlpatterns = patterns('',
     url(r'^$', TemplateView.as_view(template_name='index.html'), name='index'),
     url(r'^api/', include(router.urls)),
     url(r'^build/', build_trajectory, name='build'),
-    url(r'^student/(?P<slug>[^/]+)/$', DetailStudent.as_view(),
-    name='detail-student'),
-    url(r'^profile/(?P<slug>[^/]+)/$', ProfileView.as_view(), 
-    name='profile'),
+    #url(r'^student/(?P<slug>[^/]+)/$', DetailStudent.as_view(),
+    #name='detail-student'),
+    #url(r'^profile/(?P<slug>[^/]+)/$', ProfileView.as_view(), 
+    #name='profile'),
 )
 
