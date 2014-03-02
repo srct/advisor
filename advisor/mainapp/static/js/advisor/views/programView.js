@@ -16,7 +16,7 @@ advisor.ProgramView = Backbone.View.extend({
   },
 
   render_courses: function() {
-    this.$('.panel-body').html('');
+    this.$('.courses-panel').html('');
     var that = this;
     this.model.fetchRelated('requirements', {
       success: function(requirements) {
