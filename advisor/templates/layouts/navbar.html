@@ -12,10 +12,10 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><a href="#">Search</a></li>
-	{% if user.is_authenticated %}
-	    <li><a href="{% url 'django.contrib.auth.views.logout' %}">Logout</a></li>
-	{% else %}
+	{% if user.is_anonymous %}
         <li><a href="{% url 'django.contrib.auth.views.login' %}">Log In</a></li>
+	{% else %}
+	    <li><a href="{% url 'django.contrib.auth.views.logout' %}">Logout</a></li>
     {% endif %}
       </ul>
     </div><!--/.nav-collapse -->
