@@ -9,8 +9,17 @@
     <%= dept %> <%= courseid %>
 </script>
 <script type="text/template" id="program-template">
-  <div class="panel-heading">
+  <div class="panel-heading program-title">
     <h3 class="panel-title"><%= name %></h3>
+  </div>
+  <div class="panel-body">
+    <div class="gridster courses">
+    </div>
+  </div>
+</script>
+<script type="text/template" id="semester-template">
+  <div class="panel-heading">
+    <h3 class="panel-title">Semester <%= id %></h3>
   </div>
   <div class="panel-body">
     <div class="gridster courses">
@@ -20,24 +29,24 @@
 {% endblock %}
 
 {% block content %}
-<div class="row">
-  <div class="col-lg-12">
+<div class="row semester-controls">
+  <div class="col-lg-2 col-lg-offset-8">
+    <a href="#NewSemester" class="btn btn-block btn-lg btn-info">Semester <i class="fa fa-plus"></i> </a>
+  </div>
+  <div class="col-lg-2">
+    <a href="#Save" class="btn btn-block btn-lg btn-primary">Save</a>
   </div>
 </div>
 <div class="row gridster">
   <div id="" class="col-lg-12">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h3 class="panel-title">Semester</h3>
-      </div>
-      <div class="panel-body"></div>
+    <div id="semesters">
     </div>
     <div id="programs">
     <div class="panel panel-primary">
       <div class="panel-heading">
         <h3 class="panel-title">Computer Science Major</h3>
       </div>
-      <div class="panel-body">
+      <div class="panel-body courses-panel">
         <div class="gridster courses">
           <ul>
               <li data-row="1" data-col="1" data-sizex="1" data-sizey="1"></li>
@@ -97,12 +106,17 @@
   <script src="/static/js/advisor/models/course.js"></script>
   <script src="/static/js/advisor/models/requirement.js"></script>
   <script src="/static/js/advisor/models/program.js"></script>
+  <script src="/static/js/advisor/models/semester.js"></script>
+  <script src="/static/js/advisor/models/trajectory.js"></script>
   <script src="/static/js/advisor/collections/courses.js"></script>
   <script src="/static/js/advisor/collections/requirements.js"></script>
   <script src="/static/js/advisor/collections/programs.js"></script>
+  <script src="/static/js/advisor/collections/semesters.js"></script>
   <script src="/static/js/advisor/views/courseView.js"></script>
   <script src="/static/js/advisor/views/programView.js"></script>
+  <script src="/static/js/advisor/views/semesterView.js"></script>
   <script src="/static/js/advisor/views/programCollectionView.js"></script>
+  <script src="/static/js/advisor/views/semesterCollectionView.js"></script>
   <script src="/static/js/advisor/views/courseCollectionView.js"></script>
   <script src="/static/js/advisor/app.js"></script>
 {% endblock %}

@@ -7,6 +7,7 @@ advisor.CourseView = Backbone.View.extend({
   template: _.template( $('#course-template').html() ),
 
   events: {
+    "click": "info"
   },
 
   initialize: function() {
@@ -18,4 +19,8 @@ advisor.CourseView = Backbone.View.extend({
     $('body').append( this.template( this.model.toJSON() ) );
     return this;
   },
+
+  info: function() {
+    
+  }
 });

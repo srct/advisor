@@ -21,7 +21,7 @@ body {
   height: 16px;
 }
 #main {
-  margin-top: 65px;
+  padding-top: 65px;
 }
 
 .courses li {
@@ -31,9 +31,16 @@ body {
 
 .program {
   text-align: center;
-  padding-bottom: 15px;
+  max-height: 480px;
+  overflow-y: scroll;
 }
 
+.program-title {
+  padding: 16px 0;
+}
+.semester-controls {
+  margin-bottom: 15px;
+}
 .course {
   width: 160px;
   height: 80px;

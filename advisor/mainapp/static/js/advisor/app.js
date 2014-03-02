@@ -1,8 +1,22 @@
 var advisor = advisor || {};
 
+
 $(function () {
   advisor.Programs = new advisor.ProgramCollection();
   var p = new advisor.Program({id: 3});
   advisor.Programs.reset([p]);
   (new advisor.ProgramCollectionView())
+
+  var t = new advisor.Trajectory({id: 1});
+  t.fetch({
+    success: function() {
+      t.fetchRelated('semesters', {
+        success: function() {
+          advisor.Semesters = t.get('semesters');
+          new advisor.SemesterCollectionView();
+        }
+      });
+    }
+  });
+
 });
