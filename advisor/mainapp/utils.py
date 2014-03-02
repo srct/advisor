@@ -20,7 +20,7 @@ def programCourses(program):
                 coursegroup = CourseGroup.objects.get(title=course.title)
                 repeat = True
                 courses.remove(course)
-                for newcourse in coursegroup.courses:
+                for newcourse in coursegroup.courses.all():
                     courses.append(newcourse)
 
     return courses
