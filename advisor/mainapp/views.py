@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,login_required
 from django.views.generic import (CreateView, ListView, DetailView, DeleteView,
 UpdateView, FormView)
 
@@ -35,6 +35,7 @@ def searchMajorMinor(request):
             return build_trajectory(request)
 
 #API SHIT
+@login_required
 def profile(request):
     current_user = Student.objects.get(user__username=request.user.username)
 
