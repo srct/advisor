@@ -8,7 +8,14 @@ from mainapp.models import Course # import more
 
 ### automatically building a trajectory
 
-#def someautomaticfunction():
+def someautomaticfunction():
+    """ Brute force a path? """
+    return True
+
+def someotherautomatedfunction():
+    """ Weigh some things over other things in choosing how to add courses
+        to a semester """
+    return True
 
 ### editing a trajectory
 
