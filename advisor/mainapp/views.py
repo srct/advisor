@@ -32,7 +32,7 @@ def build_trajectory(request):
         programs = []
         programs.append(to_search_major)
         programs.append(to_search_minor)
-        user_in = User.objects.get(user=request.user)
+        user_in = User.objects.get(username=request.user.username)
         trac = genTrajectories(taken=None,programs=programs,user=user_in)
         #majors = form.fie
     return render_to_response('build.html', {
