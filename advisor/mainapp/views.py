@@ -45,9 +45,8 @@ def profile(request):
             "user" : current_user,
             "firstname" : current_user.user.first_name,
             "advisorname" : current_user.advisorname,
-    },
-    context_instance = RequestContext(request),
-    )
+    }
+    
 
 class RequirementViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Requirement.objects.all()
