@@ -5,11 +5,10 @@ from mainapp.models import Course, Semester, Trajectory # import more
 def programCourses(program):
 
     courses = []
-    requirements = program.requirements.all()
-    for requirement in requirements:
-        for coursegroup in requirement.courses.all():
-            for course in coursegroup.courses.all():
-                courses.append(course)
+    requirements = program.requirements
+    for requirement in requirements.all():
+        for course in requirement.courses.all():
+            courses.append(course)
 
     return courses
 
@@ -132,7 +131,7 @@ def nextCourses(remainingReqCourses, taken):
     nextcourses = []
     for course in remainingReqCourses:
         reqs = set()
-        for prereq in course.preq:
+        for prereq in course.prerequisites:
             reqs.add(prereq)
         #for coreq in course.coreq:
         #    reqs.add(coreq)
