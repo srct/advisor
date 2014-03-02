@@ -40,7 +40,6 @@ def searchMajorMinor(request):
 @login_required
 def profile(request):
     current_user = get_object_or_404(Student,user__username=request.user.username)
-
     return render_to_response('profile.html', {
             "current_user" : current_user,
             "firstname" : current_user.user.first_name,
