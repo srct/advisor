@@ -20,8 +20,11 @@ def programCourses(program):
                 coursegroup = CourseGroup.objects.get(title=course.title)
                 repeat = True
                 courses.remove(course)
+                numadded = 0
                 for newcourse in coursegroup.courses.all():
+                    if numadded < coursegroup.numneeded
                     courses.append(newcourse)
+                    numadded++
 
     return courses
 
