@@ -21,9 +21,9 @@ def programCourses(program):
 
 ### automatically building a trajectory
 
-def assignWeights(weightedCourse, programCourses):
-
-    assignWeights = {}
+def assignedWeights(weightedCourse, programCourses):
+    """ assign weights to all courses in a program for automation """
+    assignedWeights = {}
 
     for weightedCourse in programCourses:
         weightedCourseCounter = 0
@@ -38,11 +38,24 @@ def assignWeights(weightedCourse, programCourses):
                 if req is course:
                     weightedCourseCounter += 1
                     childReqList.append(course)
-                    assignWeights(course, childReqList)
+                    assignedWeights(course, childReqList)
                 
-        assignWeights[weighedCourse] = coursecounter
+        assignedWeights[weighedCourse] = coursecounter
         
     return assignWeights
+
+def customAssignedWeights(assignedWeights, selectedCourses):
+    """ remove courses that a student has not selected from the weighted
+        courses """
+    customAssignedWeights = assignedWeights
+
+    for course in selectedCourses:
+        del customAssignedWeights[course]
+
+    return customAssignedWeights
+
+def shortestPath(assignedWeights):
+    return True
 
 ### editing a trajectory
 
