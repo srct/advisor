@@ -20,9 +20,8 @@ from mainapp.forms import StartTrajectoryForm, StudentForm
 @login_required
 def build_trajectory(request):
     #process
-    semester_key = 1
-    return render(request, 'build.html')
-
+    return render_to_response('build.html', {
+    })
 class StartTrajectoryView(FormView):
     template_name = 'new.html'
     form_class = StartTrajectoryForm
