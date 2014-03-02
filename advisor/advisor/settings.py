@@ -37,6 +37,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'mainapp',
+    'compare',
     'rest_framework',
     'south',
     'django_gravatar',
@@ -98,6 +99,7 @@ STATICFILES_FINDERS = (
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates/'),
     os.path.join(BASE_DIR, 'mainapp/templates/'),
+    os.path.join(BASE_DIR, 'compare/templates/'),
 )
 
 REST_FRAMEWORK = {
