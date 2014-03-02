@@ -239,7 +239,7 @@ def genTrajectories(taken, programs, user):
         #        failed=True
         #if not failed:
         #     break
-        if enoughCredits(taken, 120):
+        if enoughCredits(taken, 120) or sem.number > 10:
             break
     return tj
             
