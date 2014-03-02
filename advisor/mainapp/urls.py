@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, include, url
+from django.views.generic import TemplateView
 from mainapp.views import (ProgramViewSet, CourseViewSet, CourseGroupViewSet,
 TrajectoryViewSet, build_trajectory, SemesterViewSet, BuildResponseViewSet,
 DetailStudent, ProfileView)
