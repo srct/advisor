@@ -4,6 +4,10 @@ from django.core.exceptions import ValidationError
 from mainapp.models import Student, Major, Minor, GenEd
 
 # form on new page
+class StartTrajectoryForm(forms.Form):
+    major = forms.CharField(max_length=100)
+    minor = forms.CharField(max_length=100)
+
 class SelectMajorForm(forms.ModelForm):
     class Meta:
         model = Major
