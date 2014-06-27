@@ -41,3 +41,5 @@ class MinorIndex(indexes.SearchIndex, indexes.Indexable):
 
     def index_queryset(self, using=None):
         return self.get_model().objects.all()
+
+# add ability to search for students
