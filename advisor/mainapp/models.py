@@ -3,6 +3,13 @@ from autoslug import AutoSlugField
 from django.db import models
 from django.contrib.auth.models import User
 
+class University(models.Model):
+    name = models.CharField(max_length=100)
+    location = models.CharField(max_length=100)
+    #homepage = models.URLField()
+
+    def __unicode__(self):
+        return '%s' % self.name
 
 class Student(TimeStampedModel):
     user = models.OneToOneField(User)
